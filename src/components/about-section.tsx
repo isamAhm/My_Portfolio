@@ -28,7 +28,7 @@ export function AboutSection() {
           <div className="space-y-6 order-2 md:order-1">
             <h2 className="text-4xl font-bold text-white font-fira-code">About Me</h2>
             <p className="text-lg text-gray-300">
-              I'm a passionate software engineer with a love for creating elegant solutions to complex problems. 
+              Hey there, I'm Isam Ahmed, a passionate software engineer with a love for creating elegant solutions to complex problems. 
               With expertise in modern web technologies and a keen eye for design, I build applications that 
               not only function flawlessly but also provide exceptional user experiences.
             </p>
