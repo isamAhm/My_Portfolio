@@ -74,7 +74,7 @@ export function HeroContent() {
   return (
     <motion.div
       ref={ref}
-      className="relative z-10 text-center"
+      className="relative z-10 text-center max-md:-mt-64"
       style={{ opacity, y }}
     >
       <h1 className="text-gradient font-fira-code text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-relaxed">

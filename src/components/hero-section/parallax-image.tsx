@@ -15,7 +15,7 @@ export function ParallaxImage() {
   return (
     <motion.div 
       ref={ref}
-      className="absolute inset-0 z-0"
+      className="absolute inset-0 z-0 max-md:hidden"
       style={{ scale, opacity }}
     >
       <div className="absolute bottom-0 inset-0 bg-gradient-to-b from-transparent to-background z-10" />

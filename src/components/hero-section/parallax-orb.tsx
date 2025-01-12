@@ -16,7 +16,7 @@ export function ParallaxOrb() {
   return (
     <motion.div 
       ref={ref}
-      className="absolute top-1/3 bottom-0 -translate-x-1/2 -translate-y-1/2 w-96 z-20 "
+      className="absolute top-1/3 bottom-0 -translate-x-1/2 -translate-y-1/2 w-96 z-20 max-md:hidden"
       style={{ y, scale, opacity }}
     >
       <div className="relative w-full h-full">
