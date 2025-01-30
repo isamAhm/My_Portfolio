@@ -17,8 +17,8 @@ const skills = [
 ];
 
 const langs = [
-  { name: 'Amharic', proficiency: 95, level: 'Native' },
-  { name: 'English', proficiency: 65, level: 'Intermediate' },
+  { name: 'Amharic', proficiency: 100, level: 'Native' },
+  { name: 'English', proficiency: 95, level: 'Fluent' },
   { name: 'Afan Oromo', proficiency: 60, level: 'Intermediate' },
   { name: 'Arabic', proficiency: 30, level: 'Beginner' },
 ];
