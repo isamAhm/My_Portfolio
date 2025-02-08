@@ -30,6 +30,7 @@ export default {
       fontFamily: {
         "press-start": ['"Press Start 2P"', "cursive"],
         "fira-code": ['"Fira Code"', "cursive"],
+        blackOps: ['"Black Ops One"', "serif"],
       },
       keyframes: {
         "alien-text": {

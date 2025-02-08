@@ -6,15 +6,17 @@ interface UseFollowCursorOptions {
   intensityY?: number;
   ease?: string;
   duration?: number;
+  proximity?: number; // Distance threshold for activation
 }
 
 export function useFollowCursor(
   ref: React.RefObject<HTMLElement>,
   {
-    intensityX = 5,
-    intensityY = 0.6,
+    intensityX = 10,
+    intensityY = 4,
     ease = 'power2.out',
     duration = 0.5,
+    proximity = 100, // Default proximity threshold (in pixels)
   }: UseFollowCursorOptions = {}
 ) {
   useEffect(() => {
@@ -32,16 +34,35 @@ export function useFollowCursor(
       const { clientX, clientY } = e;
       const { left, top, width, height } = element.getBoundingClientRect();
 
-      const x = (clientX - left) / width - 0.5;
-      const y = (clientY - top) / height - 0.5;
+      // Calculate the center of the element
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
 
-      gsap.to(element, {
-        rotateY: x * intensityX,
-        rotateX: -y * intensityY,
-        duration,
-        ease,
-        transformPerspective: 200,
-      });
+      // Calculate the distance between the mouse and the center of the element
+      const distanceX = Math.abs(clientX - centerX);
+      const distanceY = Math.abs(clientY - centerY);
+
+      // Check if the mouse is within the proximity threshold
+      if (distanceX <= proximity && distanceY <= proximity) {
+        const x = (clientX - left) / width - 0.5;
+        const y = (clientY - top) / height - 0.5;
+
+        gsap.to(element, {
+          rotateY: -x * intensityX, // Negate the x value to reverse the rotation direction
+          rotateX: y * intensityY,
+          duration,
+          ease,
+          transformPerspective: 200,
+        });
+      } else {
+        // Reset the element's rotation if the mouse is outside the proximity threshold
+        gsap.to(element, {
+          rotateY: 0,
+          rotateX: 0,
+          duration,
+          ease,
+        });
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -50,5 +71,5 @@ export function useFollowCursor(
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [ref, intensityX, intensityY, ease, duration]);
+  }, [ref, intensityX, intensityY, ease, duration, proximity]);
 }
