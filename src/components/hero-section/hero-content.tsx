@@ -1,13 +1,13 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '../ui/button';
-import { useEffect, useRef } from 'react'; // Remove useState
+import { useEffect, useRef } from 'react';
 import { Code, Github, Linkedin, Mail } from 'lucide-react';
-import gsap from 'gsap'; // Import GSAP
-import { useFollowCursor } from '../hooks/useFollowCursor'; // Adjust the import path
+import gsap from 'gsap';
+import { useFollowCursor } from '../hooks/useFollowCursor';
 
 export function HeroContent() {
-  const ref = useRef<HTMLDivElement>(null); // Ref for the parent box
-  const dynamicTextRef = useRef<HTMLSpanElement>(null); // Ref for the dynamic text
+  const ref = useRef<HTMLDivElement>(null);
+  const dynamicTextRef = useRef<HTMLSpanElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 700px", "end 200px"],
@@ -16,24 +16,13 @@ export function HeroContent() {
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const y = useTransform(scrollYProgress, [0, 0.3], ['50%', '50%']);
 
-  // Apply the cursor-following effect to the parent box
   useFollowCursor(ref, { proximity: 300 });
 
-  // GSAP Hover Effect for individual characters
   useEffect(() => {
     const chars = document.querySelectorAll('.char');
 
-    // Define unique colors for each character
     const hoverColors = [
-      '#3b82f6', // Blue
-      '#10b981', // Green
-      '#ef4444', // Red
-      '#8b5cf6', // Purple
-      '#06b6d4', // Cyan
-      '#f97316', // Orange
-      '#ec4899', // Pink
-      '#84cc16', // Lime
-      '#f59e0b', // Amber
+      '#3b82f6', '#10b981', '#ef4444', '#8b5cf6', '#06b6d4', '#f97316', '#ec4899', '#84cc16', '#f59e0b',
     ];
 
     chars.forEach((char, index) => {
@@ -51,16 +40,16 @@ export function HeroContent() {
         <path d="M12 20l7 -12h-14z"></path>
       `;
       svg.style.position = 'absolute';
-      svg.style.top = '-1.5rem'; // Position above the text
+      svg.style.top = '-1.5rem';
       svg.style.left = '50%';
       svg.style.transform = 'translateX(-50%)';
       svg.style.opacity = '0';
-      svg.style.pointerEvents = 'none'; // Ensure the SVG doesn't interfere with hover
+      svg.style.pointerEvents = 'none';
       char.appendChild(svg);
 
       char.addEventListener('mouseenter', () => {
         gsap.to(char, {
-          color: hoverColors[index % hoverColors.length], // Assign unique color
+          color: hoverColors[index % hoverColors.length],
           letterSpacing: '0.1em',
           duration: 0.3,
         });
@@ -73,7 +62,7 @@ export function HeroContent() {
 
       char.addEventListener('mouseleave', () => {
         gsap.to(char, {
-          color: 'inherit', // Reset to default gradient color
+          color: 'inherit',
           letterSpacing: '0em',
           duration: 0.3,
         });
@@ -85,7 +74,6 @@ export function HeroContent() {
       });
     });
 
-    // Cleanup event listeners on unmount
     return () => {
       chars.forEach((char) => {
         char.removeEventListener('mouseenter', () => {});
@@ -94,7 +82,6 @@ export function HeroContent() {
     };
   }, []);
 
-  // Effect to change the dynamic text
   useEffect(() => {
     const texts = [
       'Software Engineer',
@@ -108,17 +95,13 @@ export function HeroContent() {
 
     const interval = setInterval(() => {
       if (dynamicTextRef.current) {
-        // Fade out the current text
         gsap.to(dynamicTextRef.current, {
           opacity: 0,
           duration: 0.5,
           ease: 'power2.out',
           onComplete: () => {
-            // Update the text
             currentIndex = (currentIndex + 1) % texts.length;
             dynamicTextRef.current!.textContent = texts[currentIndex];
-
-            // Fade in the new text
             gsap.to(dynamicTextRef.current, {
               opacity: 0.6,
               duration: 0.5,
@@ -127,33 +110,36 @@ export function HeroContent() {
           },
         });
       }
-    }, 3000); // Change text every 3 seconds
+    }, 3000);
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <motion.div
-      ref={ref} // Attach the ref to the parent box
+      ref={ref}
       className="relative z-10 text-center max-md:-mt-64"
       style={{ opacity, y }}
     >
-      <h1 className="text-gradient font-fira-code text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-relaxed">
-        {'Isam Ahmed'.split('').map((char, i) => (
-          <span key={i} className="char inline-block relative">
-            {char === ' ' ? '\u00A0' : char}
-          </span>
-        ))}
+      <h1 className="font-fira-code text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-relaxed">
+        {/* Emoji with a different style */}
+        <span className="text-white">🚀</span>
+        {/* Apply text-gradient only to "Isam Ahmed" */}
+        <span className="text-gradient">
+          {' Isam Ahmed'.split('').map((char, i) => (
+            <span key={i} className="char inline-block relative">
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
+        </span>
       </h1>
-      {/* Dynamic text section */}
       <span
-        ref={dynamicTextRef} // Attach the ref to the dynamic text
+        ref={dynamicTextRef}
         className="opacity-100 text-white hover:tracking-widest transition-all ease-in-out duration-500 home-hero-subheading text-3xl font-blackOps"
         style={{ opacity: 0.6, willChange: 'opacity' }}
       >
         Software Engineer
       </span>
-      {/* Original text */}
       <p className="mt-6 font-fira-code text-sm sm:text-base text-gray-400">
         Crafting digital experiences. Code Your Vision, Build the Future!
       </p>
