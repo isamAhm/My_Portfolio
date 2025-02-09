@@ -147,11 +147,11 @@ export function HeroContent() {
       className="relative z-10 text-center max-md:-mt-64"
       style={{ opacity, y }}
     >
-      <h1 className="text-gradient font-fira-code text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-relaxed">
+      <h1 className="font-fira-code text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-relaxed">
         {/* Emoji with a different style */}
         <span className="text-white">🚀</span>
         {/* Apply text-gradient only to "Isam Ahmed" */}
-        <span className="text-gradient">
+        <span className="text-white">
           {' Isam Ahmed'.split('').map((char, i) => (
             <span key={i} className="char inline-block relative">
               {char === ' ' ? '\u00A0' : char}
