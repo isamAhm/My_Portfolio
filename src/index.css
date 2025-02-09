@@ -46,6 +46,8 @@
         hsl(var(--accent)) 100%);
     background-size: 200% auto;
     animation: gradient 3s linear infinite;
+    color: white;
+    color: transparent;
   }
 
   .glow {
