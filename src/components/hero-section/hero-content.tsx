@@ -153,7 +153,7 @@ export function HeroContent() {
         {/* Apply text-gradient only to "Isam Ahmed" */}
         <span className="text-gradient">
           {' Isam Ahmed'.split('').map((char, i) => (
-            <span key={i} className="inline-block">
+            <span key={i} className="char inline-block relative">
               {char === ' ' ? '\u00A0' : char}
             </span>
           ))}
