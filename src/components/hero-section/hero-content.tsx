@@ -166,8 +166,8 @@ export function HeroContent() {
       >
         Software Engineer
       </span>
-      <p className="mt-6 font-fira-code text-sm sm:text-base text-[#55ACEE] opacity-80">
-      Crafting digital experiences that bring your vision to life. <br/> I translate ideas into clean, efficient code, building the future of your online presence.
+      <p className="mt-6 font-fira-code text-sm sm:text-base text-gray-400">
+      Crafting digital experiences that bring your vision to life. <br className='max-sm:hidden'/> I translate ideas into clean, efficient code, building the future of your online presence.
       </p>
       <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
         <a href="#projects">
