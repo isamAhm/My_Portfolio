@@ -44,14 +44,9 @@
         hsl(var(--primary)) 0%,
         hsl(var(--secondary)) 50%,
         hsl(var(--accent)) 100%);
-    background-size: 150% 100%;
-    /* Adjusted size */
-    -webkit-background-clip: text;
-    /* Ensures compatibility */
-    animation: gradient 4s linear infinite;
-    /* Slightly slower for smoother effect */
+    background-size: 200% auto;
+    animation: gradient 3s linear infinite;
   }
-
 
   .glow {
     @apply relative;
