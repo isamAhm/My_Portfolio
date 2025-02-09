@@ -120,7 +120,3 @@ html {
   opacity: 0.6;
   will-change: opacity;
 }
-
-.text-g {
-  @apply bg-gradient-to-br from-black via-gray-900 to-black bg-clip-text text-transparent;
-}

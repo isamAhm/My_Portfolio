@@ -20,7 +20,7 @@ export function HeroContent() {
 
   useEffect(() => {
     const chars = document.querySelectorAll('.char');
-  
+
     const hoverColors = [
       '#3b82f6', // Blue
       '#10b981', // Green
@@ -32,7 +32,7 @@ export function HeroContent() {
       '#84cc16', // Lime
       '#f59e0b', // Amber
     ];
-  
+
     chars.forEach((char, index) => {
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.setAttribute("width", "24");
@@ -54,7 +54,7 @@ export function HeroContent() {
       svg.style.opacity = '0';
       svg.style.pointerEvents = 'none';
       char.appendChild(svg);
-  
+
       char.addEventListener('mouseenter', () => {
         gsap.to(char, {
           color: hoverColors[index % hoverColors.length],
@@ -67,7 +67,7 @@ export function HeroContent() {
           duration: 0.3,
         });
       });
-  
+
       char.addEventListener('mouseleave', () => {
         gsap.to(char, {
           color: 'inherit',
@@ -81,7 +81,7 @@ export function HeroContent() {
         });
       });
     });
-  
+
     return () => {
       chars.forEach((char) => {
         char.removeEventListener('mouseenter', () => {});
@@ -148,17 +148,17 @@ export function HeroContent() {
       style={{ opacity, y }}
     >
       <h1 className="font-fira-code text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-relaxed">
-         {/* Emoji with a different style */}
-          <span className="text-white">🚀</span>
-         {/* Apply text-gradient only to "Isam Ahmed" */}
-          <span className="text-gradient">
-            {' Isam Ahmed'.split('').map((char, i) => (
-              <span key={i} className="char inline-block relative">
-                {char === ' ' ? '\u00A0' : char}
-              </span>
-            ))}
-         </span>
-        </h1>
+        {/* Emoji with a different style */}
+        <span className="text-white">🚀</span>
+        {/* Apply text-gradient only to "Isam Ahmed" */}
+        <span className="bg-gradient-to-br from-black via-gray-900 to-black bg-clip-text text-transparent">
+          {' Isam Ahmed'.split('').map((char, i) => (
+            <span key={i} className="char inline-block relative">
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
+        </span>
+      </h1>
       <span
         ref={dynamicTextRef}
         className="opacity-0 text-gray-500 hover:tracking-widest transition-all ease-in-out duration-500 home-hero-subheading text-3xl font-zenDots change"
