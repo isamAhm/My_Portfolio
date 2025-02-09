@@ -22,7 +22,15 @@ export function HeroContent() {
     const chars = document.querySelectorAll('.char');
 
     const hoverColors = [
-      '#3b82f6', '#10b981', '#ef4444', '#8b5cf6', '#06b6d4', '#f97316', '#ec4899', '#84cc16', '#f59e0b',
+      '#3b82f6', // Blue
+      '#10b981', // Green
+      '#ef4444', // Red
+      '#8b5cf6', // Purple
+      '#06b6d4', // Cyan
+      '#f97316', // Orange
+      '#ec4899', // Pink
+      '#84cc16', // Lime
+      '#f59e0b', // Amber
     ];
 
     chars.forEach((char, index) => {
@@ -87,6 +95,7 @@ export function HeroContent() {
       'Software Engineer',
       'Web Developer',
       'Full-Stack Developer',
+      'مبدع', // Arabic word
       'Creative Coder',
       'Code Artisan',
     ];
@@ -101,7 +110,24 @@ export function HeroContent() {
           ease: 'power2.out',
           onComplete: () => {
             currentIndex = (currentIndex + 1) % texts.length;
-            dynamicTextRef.current!.textContent = texts[currentIndex];
+            const newText = texts[currentIndex];
+
+            // Check if the text is in Arabic
+            const isArabic = /[\u0600-\u06FF]/.test(newText);
+
+            // Apply the appropriate class
+            if (isArabic) {
+              dynamicTextRef.current.classList.add('font-lemonada');
+              dynamicTextRef.current.classList.remove('font-zenDots');
+            } else {
+              dynamicTextRef.current.classList.add('font-zenDots');
+              dynamicTextRef.current.classList.remove('font-lemonada');
+            }
+
+            // Update the text content
+            dynamicTextRef.current.textContent = newText;
+
+            // Fade in the new text
             gsap.to(dynamicTextRef.current, {
               opacity: 0.6,
               duration: 0.5,
@@ -135,13 +161,13 @@ export function HeroContent() {
       </h1>
       <span
         ref={dynamicTextRef}
-        className="opacity-100 text-white hover:tracking-widest transition-all ease-in-out duration-500 home-hero-subheading text-3xl font-blackOps"
+        className="opacity-0 text-gray-500 hover:tracking-widest transition-all ease-in-out duration-500 home-hero-subheading text-3xl font-zenDots"
         style={{ opacity: 0.6, willChange: 'opacity' }}
       >
         Software Engineer
       </span>
       <p className="mt-6 font-fira-code text-sm sm:text-base text-gray-400">
-        Crafting digital experiences. Code Your Vision, Build the Future!
+      Crafting digital experiences that bring your vision to life. <br/> I translate ideas into clean, efficient code, building the future of your online presence.
       </p>
       <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
         <a href="#projects">
