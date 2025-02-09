@@ -123,3 +123,14 @@ html {
 .font-zenDots {
   font-family: 'Zen Dots', sans-serif;
 }
+
+@media (max-width: 768px) {
+  .text-gradient {
+    color: hsl(var(--primary));
+    /* Fallback color for mobile */
+    background-image: none;
+    /* Disable gradient on mobile */
+    animation: none;
+    /* Disable animation on mobile */
+  }
+}
