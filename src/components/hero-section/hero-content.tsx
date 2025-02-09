@@ -151,7 +151,7 @@ export function HeroContent() {
         {/* Emoji with a different style */}
         <span className="text-white">🚀</span>
         {/* Apply text-gradient only to "Isam Ahmed" */}
-        <span className="opacity-0 text-gradient">
+        <span className="opacity-100 text-gradient">
           {' Isam Ahmed'.split('').map((char, i) => (
             <span key={i} className="char inline-block relative">
               {char === ' ' ? '\u00A0' : char}
