@@ -20,7 +20,7 @@ export function HeroContent() {
 
   useEffect(() => {
     const chars = document.querySelectorAll('.char');
-
+  
     const hoverColors = [
       '#3b82f6', // Blue
       '#10b981', // Green
@@ -32,7 +32,7 @@ export function HeroContent() {
       '#84cc16', // Lime
       '#f59e0b', // Amber
     ];
-
+  
     chars.forEach((char, index) => {
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.setAttribute("width", "24");
@@ -54,7 +54,7 @@ export function HeroContent() {
       svg.style.opacity = '0';
       svg.style.pointerEvents = 'none';
       char.appendChild(svg);
-
+  
       char.addEventListener('mouseenter', () => {
         gsap.to(char, {
           color: hoverColors[index % hoverColors.length],
@@ -67,7 +67,7 @@ export function HeroContent() {
           duration: 0.3,
         });
       });
-
+  
       char.addEventListener('mouseleave', () => {
         gsap.to(char, {
           color: 'inherit',
@@ -81,7 +81,7 @@ export function HeroContent() {
         });
       });
     });
-
+  
     return () => {
       chars.forEach((char) => {
         char.removeEventListener('mouseenter', () => {});
