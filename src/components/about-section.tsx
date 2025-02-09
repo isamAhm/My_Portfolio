@@ -22,7 +22,7 @@ export function AboutSection() {
   }, { scope: sectionRef });
 
   return (
-    <section id="about" ref={sectionRef} className="relative min-h-screen bg-transparent py-20">
+    <section id="about" ref={sectionRef} className="relative min-h-screen bg-transparent py-20 max-sm:-mt-72">
       <div className="mx-auto max-w-7xl px-4">
         <div ref={contentRef} className="grid gap-12 md:grid-cols-2 items-center">
           <div className="space-y-6 order-2 md:order-1">
