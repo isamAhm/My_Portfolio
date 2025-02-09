@@ -148,17 +148,17 @@ export function HeroContent() {
       style={{ opacity, y }}
     >
       <h1 className="font-fira-code text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-relaxed">
-        {/* Emoji with a different style */}
-        <span className="text-white">🚀</span>
-        {/* Apply text-gradient only to "Isam Ahmed" */}
-        <span className="opacity-100 text-gradient inline-block">
-          {' Isam Ahmed'.split('').map((char, i) => (
-            <span key={i} className="char inline-block relative">
-              {char === ' ' ? '\u00A0' : char}
-            </span>
-          ))}
-        </span>
-      </h1>
+          {/* Emoji with a different style */}
+         <span className="text-white">🚀</span>
+         {/* Apply text-gradient only to "Isam Ahmed" */}
+         <span className="text-gradient">
+            {' Isam Ahmed'.split('').map((char, i) => (
+             <span key={i} style={{ display: 'inline-block' }}>
+               {char === ' ' ? '\u00A0' : char}
+             </span>
+           ))}
+         </span>
+        </h1>
       <span
         ref={dynamicTextRef}
         className="opacity-0 text-gray-500 hover:tracking-widest transition-all ease-in-out duration-500 home-hero-subheading text-3xl font-zenDots change"
