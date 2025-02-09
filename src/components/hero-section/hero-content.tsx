@@ -151,7 +151,7 @@ export function HeroContent() {
         {/* Emoji with a different style */}
         <span className="text-white">🚀</span>
         {/* Apply text-gradient only to "Isam Ahmed" */}
-        <span className="text-gradient text-lightslate">
+        <span className="text-[#55ACEE] opacity-80">
           {' Isam Ahmed'.split('').map((char, i) => (
             <span key={i} className="char inline-block relative">
               {char === ' ' ? '\u00A0' : char}
@@ -161,12 +161,12 @@ export function HeroContent() {
       </h1>
       <span
         ref={dynamicTextRef}
-        className="opacity-0 text-gray-500 hover:tracking-widest transition-all ease-in-out duration-500 home-hero-subheading text-3xl font-zenDots change"
+        className="opacity-0 text-gradient hover:tracking-widest transition-all ease-in-out duration-500 home-hero-subheading text-3xl font-zenDots change"
         
       >
         Software Engineer
       </span>
-      <p className="mt-6 font-fira-code text-sm sm:text-base text-gray-400">
+      <p className="mt-6 font-fira-code text-sm sm:text-base text-[#55ACEE] opacity-80">
       Crafting digital experiences that bring your vision to life. <br/> I translate ideas into clean, efficient code, building the future of your online presence.
       </p>
       <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center">

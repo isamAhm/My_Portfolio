@@ -48,6 +48,10 @@
     animation: gradient 3s linear infinite;
   }
 
+  .mobile-name {
+    color: darkslateblue;
+  }
+
   .glow {
     @apply relative;
   }
