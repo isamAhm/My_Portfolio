@@ -44,17 +44,14 @@
         hsl(var(--primary)) 0%,
         hsl(var(--secondary)) 50%,
         hsl(var(--accent)) 100%);
-    background-size: 200% auto;
+    background-size: 150% 100%;
+    /* Adjusted size */
     -webkit-background-clip: text;
-    /* WebKit prefix */
-    background-clip: text;
-    /* Standard property */
-    -webkit-text-fill-color: transparent;
-    /* WebKit prefix */
-    color: transparent;
-    /* Standard property */
-    animation: gradient 3s linear infinite;
+    /* Ensures compatibility */
+    animation: gradient 4s linear infinite;
+    /* Slightly slower for smoother effect */
   }
+
 
   .glow {
     @apply relative;
@@ -122,15 +119,4 @@ html {
 
 .font-zenDots {
   font-family: 'Zen Dots', sans-serif;
-}
-
-@media (max-width: 768px) {
-  .text-gradient {
-    color: hsl(var(--primary));
-    /* Fallback color for mobile */
-    background-image: none;
-    /* Disable gradient on mobile */
-    animation: none;
-    /* Disable animation on mobile */
-  }
 }
