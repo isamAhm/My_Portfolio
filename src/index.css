@@ -39,12 +39,18 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg,
         hsl(var(--primary)) 0%,
         hsl(var(--secondary)) 50%,
         hsl(var(--accent)) 100%);
     background-size: 200% auto;
+    -webkit-background-clip: text;
+    /* Safari and older Chrome */
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Safari and older Chrome */
+    color: hsl(var(--primary));
+    /* Fallback color */
     animation: gradient 3s linear infinite;
   }
 
