@@ -8,7 +8,7 @@ import {
 
 import { useEffect, useRef } from "react";
 import image1 from '../assets/tictactoe.png';
-import image2 from '../assets/streambox2.png';
+import image2 from '../assets/streambox1.png';
 import image3 from '../assets/portgo.png';
 import image4 from '../assets/snap.png';
 
