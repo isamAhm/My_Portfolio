@@ -31,7 +31,7 @@ export function SkillsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold mb-6 text-white">Skills</h2>
@@ -47,7 +47,7 @@ export function SkillsSection() {
               initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              
             >
               <SkillBar
                 name={skill.name}
@@ -64,7 +64,7 @@ export function SkillsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          
           className="text-left mb-16"
         >
           <h2 className="text-4xl font-bold mb-6 text-white">Languages</h2>
@@ -80,7 +80,7 @@ export function SkillsSection() {
               initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              
             >
               <LangBar
                 name={lang.name}

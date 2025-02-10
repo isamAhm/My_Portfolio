@@ -35,7 +35,7 @@ function App() {
     <main className="relative">
       {isLoading ? (
         <div
-          className={`fixed inset-0 bg-transparent flex flex-col items-center justify-center z-50 transition-opacity duration-500 ${
+          className={`fixed inset-0 bg-gradient-to-br from-black via-gray-950 to-black flex flex-col items-center justify-center z-50 transition-opacity duration-500 ${
             isFading ? 'opacity-0' : 'opacity-100'
           }`}
         >
