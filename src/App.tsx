@@ -1,6 +1,8 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import LoadingScreen from './components/loading/loading-screen';
 import { Navbar } from './components/navbar/navbar';
+import { SmoothScrollHero } from './components/SmoothScroll';
+import HorizontalText from './components/HorizontalText';
 
 const HeroSection = React.lazy(() =>
   import('./components/hero-section/home').then((mod) => ({ default: mod.HeroSection }))
@@ -48,7 +50,9 @@ function App() {
             <HeroSection />
             <AboutSection />
             <SkillsSection />
+            <SmoothScrollHero/>
             <ProjectsSection />
+            <HorizontalText/>
             <ContactSection />
           </Suspense>
         </>

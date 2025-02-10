@@ -24,6 +24,7 @@
     --input: 220 10% 25%;
     --ring: 200 60% 45%;
     --radius: 0.5rem;
+    --section-height: 0px;
   }
 }
 
@@ -46,6 +47,10 @@
         hsl(var(--accent)) 100%);
     background-size: 200% auto;
     animation: gradient 3s linear infinite;
+  }
+
+  .h-dynamic {
+    height: calc(var(--section-height) + 100vh);
   }
 
   .mobile-name {
@@ -127,4 +132,16 @@ html {
 
 .lightslate {
   color: lightslategray;
+}
+
+.para {
+  style= {
+      {
+      height: `calc($ {
+          SECTION_HEIGHT
+        }
+
+        px + 100vh)`
+    }
+  }
 }

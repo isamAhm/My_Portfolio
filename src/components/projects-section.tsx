@@ -92,13 +92,13 @@ export function ProjectsSection() {
     <section 
       id="projects" 
       ref={sectionRef} 
-      className="min-h-screen bg-transparent py-20"
+      className="max-md:-mt-96 min-h-screen bg-transparent py-20"
     >
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-white mb-12 text-center">
           Featured Projects
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:-mb-48">
           {projects.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}
