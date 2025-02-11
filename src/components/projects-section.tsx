@@ -11,6 +11,7 @@ import portfolio from '../assets/portfolio.png';
 import snapscape from '../assets/snap.png';
 import hiresmart from '../assets/hiresmart2.png';
 import efoyta from '../assets/efoyta.png';
+import mobile from '../assets/mobile1.png';
 import React, { useState } from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 
@@ -141,7 +142,7 @@ function ProjectDetail() {
           <DetailProjectCard 
             title="Cultural Restaurant Management"
             description="A mobile app for a table reservation solution designed specifically for a local Ethiopian cultural restaurant. The project aims to simplify the process of managing table reservations and food ordering while offering a user-friendly experience for both administrators and customers. The system ensures smooth booking, enhances operational efficiency, and facilitates easy management of tables. With secure authentication and an intuitive interface, the system meets the unique needs of the restaurant while maintaining simplicity and efficiency, providing a complete dining experience."
-            image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60"
+            image={mobile}
             technologies={['Flutter', 'Express', 'REST', 'Node.js', 'MongoDB','Swift','Dart']}
             liveUrl="https://404-beryl.vercel.app/"
             githubUrl="https://github.com/FikreyohanesAbera/flutter-2024-proj"
