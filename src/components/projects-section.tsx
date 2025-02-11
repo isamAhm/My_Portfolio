@@ -95,7 +95,7 @@ export function ProjectsSection() {
 
   return (
     <section 
-      id="projects" 
+      
       ref={sectionRef} 
       className="min-h-screen bg-transparent py-20"
     >
@@ -116,7 +116,7 @@ export function ProjectsSection() {
 
 function ProjectDetail() {
   return (
-    <div className="min-h-screen bg-transparent text-white">
+    <div id="projects" className="min-h-screen bg-transparent text-white">
 
      
 
