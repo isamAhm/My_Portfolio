@@ -37,7 +37,7 @@ const HorizontalScrollCarousel = () => {
   const sentence = "Let's create the future, one line of code at a time; turning imagination into reality.";
 
   return (
-    <section ref={targetRef} className="relative h-[100vh] bg-transparent z-10">
+    <section ref={targetRef} className="relative h-[70vh] bg-transparent z-10">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div style={{ x }} className="flex items-center whitespace-nowrap">
           <p className="text-6xl font-black uppercase text-neutral-200 font-zenDots max-md:text-3xl">
