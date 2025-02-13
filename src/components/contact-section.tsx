@@ -109,7 +109,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="min-h-screen bg-transparent py-20">
+    <section id="contact" ref={sectionRef} className="min-h-screen bg-transparent py-20 -mt-48">
       <div className="mx-auto max-w-3xl px-4">
         <h2 className="mb-12 text-center text-4xl font-bold text-white">Let's Connect</h2>
         <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
