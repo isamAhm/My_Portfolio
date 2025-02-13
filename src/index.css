@@ -135,13 +135,5 @@ html {
 }
 
 .para {
-  style= {
-      {
-      height: `calc($ {
-          SECTION_HEIGHT
-        }
-
-        px + 100vh)`
-    }
-  }
+  height: calc(var(--section-height) + 100vh);
 }

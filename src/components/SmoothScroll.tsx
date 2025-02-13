@@ -38,17 +38,16 @@ const SECTION_HEIGHT = 400;
 const Hero: React.FC = () => {
   useEffect(() => {
     document.documentElement.style.setProperty("--section-height", `${SECTION_HEIGHT}px`);
-  }, []); // Dependency array should not include SECTION_HEIGHT since it's a constant
+  }, []);
 
   return (
-    <div className="relative w-full h-dynamic">
-        
+    <div className="relative w-full h-dynamic para">
       <ParallaxImages />
-
       <div className="absolute bottom-0 left-0 right-0 h-96 bg-transparent" />
     </div>
   );
 };
+
 
 const ProjectText: React.FC = () => {
     

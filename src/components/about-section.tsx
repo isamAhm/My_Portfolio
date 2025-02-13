@@ -3,6 +3,9 @@ import gsap from 'gsap';
 import { useRef, useEffect } from 'react';
 import { FloatingKeywords } from './floating-keywords';
 import { ProfileImage } from './profile-image';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -15,8 +18,9 @@ export function AboutSection() {
       duration: 1,
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: 'top center',
-        end: 'bottom center',
+        start: 'top 70%',
+        end: 'bottom 60%',
+        scrub: false,
       },
     });
   }, { scope: sectionRef });
@@ -27,9 +31,9 @@ export function AboutSection() {
         <div ref={contentRef} className="grid gap-12 md:grid-cols-2 items-center">
           <div className="space-y-6 order-2 md:order-1">
             <h2 className="text-4xl font-bold text-white font-fira-code">About Me</h2>
-            <p className="text-lg text-gray-300">
+            <div className="text-lg text-gray-300">
               <BubbleText/>
-            </p>
+            </div>
             {/* <p className="text-lg text-gray-300">
               
             </p> */}
