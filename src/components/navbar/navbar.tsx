@@ -50,7 +50,7 @@ export function Navbar() {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    setIsScrolled(latest > 50);
+    setIsScrolled(latest > 400);
   });
 
   useEffect(() => {
@@ -67,8 +67,8 @@ export function Navbar() {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        isScrolled ? 'bg-black/10 backdrop-blur-md' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300  ${
+        isScrolled ? 'bg-gradient-to-b from-black via-black/80 to-black/0 ease-in-out duration-300' : 'bg-transparent ease-in-out duration-300'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -78,7 +78,7 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           <motion.a
             href="#"
-            className="flex items-center gap-2 text-2xl font-bold text-white"
+            className="flex items-center gap-2 text-2xl font-bold text-white z-50"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -86,9 +86,9 @@ export function Navbar() {
             IsamDev.
           </motion.a>
 
-          <NavLinks className="hidden md:flex hover:text-blue-950" />
+          <NavLinks className="hidden md:flex hover:text-blue-950 z-50" />
           <a
-            href={my_cv} 
+            href={my_cv} // Replace with the actual path to your CV file
             download="IsamAhmed_CV.pdf"
             className="download-cv hidden md:block px-4 py-2 ml-4 text-md font-fira-code text-white hover:text-blue-700 bg-gradient-to-br from-red-500/30 to-blue-800/30 backdrop-blur-lg rounded-md ease-in-out duration-300 focus:outline-none "
           >
