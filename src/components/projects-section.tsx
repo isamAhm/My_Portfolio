@@ -128,7 +128,7 @@ function ProjectDetail() {
             description="An intelligent resume screening platform designed to streamline the recruitment process. It helps employers efficiently filter and evaluate candidate applications by automating the screening process. By leveraging machine learning models and advanced algorithms, HireSmart quickly identifies the most suitable candidates based on their resumes and job requirements, saving valuable time and resources for hiring managers."
             image={hiresmart}
             technologies={['React.js', 'Node.js', 'JavaScript', 'OpenAI API']}
-            liveUrl="https://404-beryl.vercel.app/"
+            liveUrl="https://hire-smart-v1.vercel.app/"
             githubUrl="https://github.com/isamAhm/HireSmart_Frontend"
           />
           <DetailProjectCard 
@@ -136,7 +136,7 @@ function ProjectDetail() {
             description="A modern web-based platform designed to streamline doctor-patient interactions through an efficient appointment booking and management system. Unlike traditional methods, where appointments are often scheduled in-person visits, Efoyta allows patients to book appointments online from anywhere at their convenience. Doctors can manage their schedules, request lab checkups, and receive results digitally. Patients also receive their lab results through the platform, ensuring seamless communication and better patient care."
             image={efoyta}
             technologies={['React.js', 'Node.js', 'Redux', 'Express.js', 'MongoDB']}
-            liveUrl="https://404-beryl.vercel.app/"
+            liveUrl="https://efoyta.vercel.app/"
             githubUrl="https://github.com/isamAhm/Efoyta_Doctors_Appointment"
           />
           <DetailProjectCard 

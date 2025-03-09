@@ -3,7 +3,7 @@ import { NavLinks } from './nav-links';
 import { MobileMenu } from './mobile-menu';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Code2 } from 'lucide-react';
-import my_cv from '../../assets/Isam_Ahmed_CV.pdf';
+import my_cv from '../../assets/Isam_Ahmed_Resume.pdf';
 
 // Allowed characters for the hover effect randomization
 const allowedCharacters = ['X', '$', 'Y', '#', '?', '*', '0', '1', '+'];
