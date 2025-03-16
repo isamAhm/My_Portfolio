@@ -4,6 +4,10 @@ import { Navbar } from './components/navbar/navbar';
 import { SmoothScrollHero } from './components/SmoothScroll';
 import HorizontalText from './components/HorizontalText';
 import ProjectDetail from './components/projects-section';
+import TechnicalSkillSection from './components/technical-skills-section';
+import LanguageSection from './components/languages-section';
+import Experience from './components/Experience';
+import Certificates from './components/certificates';
 
 const HeroSection = React.lazy(() =>
   import('./components/hero-section/home').then((mod) => ({ default: mod.HeroSection }))
@@ -51,6 +55,11 @@ function App() {
             <HeroSection />
             <AboutSection />
             <SkillsSection />
+            <TechnicalSkillSection />
+            <Certificates />
+            <Experience />
+            
+            <LanguageSection />
             <SmoothScrollHero/>
             <ProjectDetail/>
             <ProjectsSection />

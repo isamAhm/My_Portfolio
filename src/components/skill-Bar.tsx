@@ -21,13 +21,13 @@ export const SkillBar: React.FC<SkillBarProps> = ({ name, level, icon }) => {
         <span className="font-semibold text-gray-200">{name}</span>
         <span className="ml-auto text-gray-400">{level}%</span>
       </div>
-      <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+      <div className="h-2 bg-gray-300/10 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="h-full bg-blue-500 rounded-full"
+          className="h-full bg-blue-700 rounded-full"
         />
       </div>
     </div>
@@ -41,13 +41,13 @@ export const LangBar: React.FC<LangBarProps> = ({ name, proficiency, level }) =>
         <span className="text-white">{name}</span>
         <span className="text-green-400">{level}</span>
       </div>
-      <div className="h-2 bg-gray-700 rounded-full">
+      <div className="h-2 bg-gray-300/10 rounded-full">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${proficiency}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="h-full bg-blue-500 rounded-full"
+          className="h-full bg-blue-700 rounded-full"
         />
       </div>
     </div>

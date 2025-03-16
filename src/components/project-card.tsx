@@ -29,9 +29,9 @@ export function ProjectCard({ title, description, image, tags, href, githubHref 
         style={{ transform: 'translateZ(1px)' }}
       />
       <div 
-        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:backdrop-blur-md"
         style={{ transform: 'translateZ(2px)' }}
-      >
+      > 
         <div className="flex h-full flex-col justify-end p-6">
           <div className='flex justify-between'>
             <a
@@ -49,7 +49,7 @@ export function ProjectCard({ title, description, image, tags, href, githubHref 
                 href={githubHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200"
+                className="flex items-center gap-2 text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200 bg-black/80 rounded p-2 backdrop-blur-lg"
                 style={{ transform: 'translateZ(3px)' }}
               >
                 <Github className="w-5 h-5" />
@@ -70,7 +70,7 @@ export function ProjectCard({ title, description, image, tags, href, githubHref 
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full bg-white/10 backdrop-blur-sm px-3 py-1 text-sm text-gray-300"
+                className="rounded-full bg-black/85 backdrop-blur-lg px-3 py-1 text-sm text-gray-300"
               >
                 {tag}
               </span>
