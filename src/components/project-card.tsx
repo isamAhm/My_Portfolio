@@ -29,7 +29,7 @@ export function ProjectCard({ title, description, image, tags, href, githubHref 
         style={{ transform: 'translateZ(1px)' }}
       />
       <div 
-        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:backdrop-blur-md"
+        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:backdrop-blur-sm hover:bg-black/20 max-md:hover:bg-black/50"
         style={{ transform: 'translateZ(2px)' }}
       > 
         <div className="flex h-full flex-col justify-end p-6">

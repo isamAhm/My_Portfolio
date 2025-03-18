@@ -27,9 +27,9 @@ function TechnicalSkillSection() {
                 icon: <Palette className="w-6 h-6 text-purple-600" />,
                 skills: [
                   { name: "Figma", icon: <Figma className="w-4 h-4" /> },
-                  { name: "Adobe XD", icon: <Pen className="w-4 h-4" /> },
+                  // { name: "Adobe XD", icon: <Pen className="w-4 h-4" /> },
                   { name: "Sketch", icon: <Layout className="w-4 h-4" /> },
-                  { name: "UI/UX Principles", icon: <Smartphone className="w-4 h-4" /> },
+                  // { name: "UI/UX Principles", icon: <Smartphone className="w-4 h-4" /> },
                   { name: "Wireframing", icon: <Layout className="w-4 h-4" /> }
                 ]
               },
@@ -48,7 +48,7 @@ function TechnicalSkillSection() {
                   { name: "Tailwind CSS", icon: <Layout className="w-4 h-4" /> },
                   { name: "Bootstrap", icon: <Layout className="w-4 h-4" /> },
                   { name: "BULMA", icon: <Layout className="w-4 h-4" /> },
-                  { name: "SASS", icon: <FileCode className="w-4 h-4" /> }
+                  // { name: "SASS", icon: <FileCode className="w-4 h-4" /> }
                 ]
               },
               {
