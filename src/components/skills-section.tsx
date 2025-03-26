@@ -10,7 +10,7 @@ const skills = [
   { icon: <Database size={20} />, name: 'Database Design', level: 80 },
   { icon: <Layout size={20} />, name: 'UI/UX Design', level: 80 },
   { icon: <User size={20} />, name: 'Full Stack Development', level: 85 },
-  { icon: <Globe size={20} />, name: 'Web Services', level: 90 },
+  { icon: <Globe size={20} />, name: 'Web Services', level: 80 },
   { icon: <Smartphone size={20} />, name: 'Mobile Development', level: 75 },
   { icon: <Workflow size={20} />, name: 'Agile Methodology', level: 85 },
 ];
