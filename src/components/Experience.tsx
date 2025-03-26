@@ -5,15 +5,15 @@ import React from 'react';
 function Experience() {
   const experiences = [
     {
-      role: "Web Developer",
+      role: "Full Stack Developer",
       company: "Platform Technologies PLC",
       period: "Feb, 2025 - Present",
       location: "Addis Ababa, Ethiopia",
-      description: "Led the development of enterprise-level React applications, mentored junior developers, and implemented best practices that improved team productivity by 40%.",
+      description: "Contributed as a Full Stack and Frontend Developer. Collaborated with a dynamic team to deliver impactful projects.",
       achievements: [
-        "Architected and delivered 3 major client projects ahead of schedule",
-        "Reduced application bundle size by 60% through code optimization",
-        "Implemented automated testing that increased code coverage to 90%"
+        "Implemented essential features based on user requirements, enhancing functionality and user experience.",
+        "Conducted thorough testing to identify and resolve issues, improving the overall software performance.",
+        "Played a key role in refining software to make it production-ready, ensuring high quality and efficiency."
       ]
     },
     {
@@ -21,46 +21,35 @@ function Experience() {
       company: "Ministry of Innovative Technology(MinT)",
       period: "Feb, 2025 - Present",
       location: "Addis Ababa, Ethiopia",
-      description: "Developed and maintained full-stack applications using React, Node.js, and PostgreSQL, serving over 100,000 active users.",
+      description: "Joined a team of developers to contribute to web hosting solutions for my internship.",
       achievements: [
-        "Built RESTful APIs that handled 1M+ daily requests",
-        "Improved application performance by 50% through caching",
-        "Integrated third-party services that automated key business processes"
+        "Monitored server performance, uptime, and traffic to ensure smooth operation",
+        "Deploying websites and web applications on web servers, ensuring seamless launch and scaling.",
+        " Improving website speed and performance through caching, and other techniques."
       ]
     },
     {
-      role: "Full Stack Developer",
+      role: "UI/UX Designer and Full Stack Developer",
       company: "Freelance",
       period: "Jan, 2024 - Present",
       location: "Addis Ababa, Ethiopia",
-      description: "Developed and maintained full-stack applications using React, Node.js, and PostgreSQL, serving over 100,000 active users.",
+      description: "Worked as both UI/UX Designer and Full Stack Developer by designing and developing modern, clean, and user-friendly web applications, prioritizing usability and accessibility.",
       achievements: [
-        "Built RESTful APIs that handled 1M+ daily requests",
-        "Improved application performance by 50% through caching",
-        "Integrated third-party services that automated key business processes"
+        "Built RESTful APIs",
+        "Designed clean and user-friendly interfaces",
+        "Ensured design consistency"
       ]
     },
-    {
-        role: "UI/UX Designer",
-        company: "Freelance",
-        period: "Jan, 2024 - Present",
-        location: "Addis Ababa, Ethiopia",
-        description: "Designed clean and user-friendly interfaces for web applications, focusing on usability and accessibility. Worked closely with developers and stakeholders to translate ideas into interactive prototypes and seamless digital experiences. Ensured design consistency through wireframing, prototyping, and iterative feedback.",
-        achievements: [
-          "Designed clean and user-friendly interfaces",
-          "Ensured design consistency",
-        //   "Improved application performance by 50% through caching",
-        //   "Integrated third-party services that automated key business processes"
-        ]
-      },
     {
       role: "Full Stack Developer",
       company: "Prodigy Info Tech",
       period: "Jun - Jul, 2024",
       location: "Addis Ababa, Ethiopia",
-      description: "Developed and maintained full-stack applications using React.js, Next.js, Node.js, PostgreSQL, and Mongodb. I completed a one-month internship developing full stack websites.",
+      description: "Developed and maintained full-stack web applications, completing a one-month internship.",
       achievements: [
-        "Built RESTful APIs",
+        "Built RESTful APIs and Integrated third-party api services",
+        "Designed a clean user interface and Ensured design consistency",
+        "Developed and maintained full-stack applications using React.js, Next.js, Node.js, PostgreSQL, and Mongodb."
         // "Improved application performance by 50% through caching",
         // "Integrated third-party services that automated key business processes"
       ]

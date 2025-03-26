@@ -1,13 +1,13 @@
 import React from 'react';
 import {
     Code2, Briefcase,
-    Figma, Palette, Pen, Layout, Smartphone,
+    Figma, Palette, Layout, Smartphone,
     MonitorSmartphone as ReactIcon, Monitor, Database, Server,
-    Terminal, GitBranch, Container as Docker, Cloud,
-    FlaskConical as TestTube, Cpu, FileCode, Coffee,
-    Binary as Python, Blocks, Boxes,
-    Github,
-    CloudCog
+    Terminal, GitBranch, Container as Cloud,
+    FlaskConical as Cpu, FileCode, Coffee,
+    Binary as Python, Blocks,
+    Github, SquareCode,
+    BugPlay
   } from 'lucide-react';
 
 function TechnicalSkillSection() {
@@ -98,6 +98,7 @@ function TechnicalSkillSection() {
                   { name: "Python", icon: <Python className="w-4 h-4" /> },
                   { name: "Java", icon: <Coffee className="w-4 h-4" /> },
                   { name: "C++", icon: <Cpu className="w-4 h-4" /> },
+                  { name: "Dart", icon: <SquareCode className="w-4 h-4" /> },
                 //   { name: "Go", icon: <Terminal className="w-4 h-4" /> }
                 ]
               },
@@ -108,6 +109,7 @@ function TechnicalSkillSection() {
                   { name: "Git", icon: <GitBranch className="w-4 h-4" /> },
                   { name: "Github", icon: <Github className="w-4 h-4" /> },
                   { name: "Vercel", icon: <Cloud className="w-4 h-4" /> },
+                  { name: "Sentry", icon: <BugPlay className="w-4 h-4" /> },
                 //   { name: "Docker", icon: <Docker className="w-4 h-4" /> },
                 //   { name: "AWS", icon: <Cloud className="w-4 h-4" /> },
                 //   { name: "CI/CD", icon: <GitBranch className="w-4 h-4" /> },
