@@ -1,5 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ProjectCard } from './project-card';
+import { VideoModal } from './video-modal';
+import { Github, ExternalLink, Play } from 'lucide-react';
+
+// Project Assets
 import streambox1 from '../assets/streambox1.png';
 import streambox2 from '../assets/streambox2.png';
 import dash from '../assets/dash.png';
@@ -12,165 +16,261 @@ import snapscape from '../assets/snap.png';
 import hiresmart from '../assets/hiresmart2.png';
 import efoyta from '../assets/efoyta.png';
 import mobile from '../assets/mobile1.png';
-import React, { useState } from 'react';
-import { Github, ExternalLink } from 'lucide-react';
+import videotry from '../assets/video.mp4';
+import dashvideo from '../assets/dash.webm';
+import skycastvideo from '../assets/skycast.webm';
+import portgovideo from '../assets/portgo.webm';
+import gridlockvideo from '../assets/gridlock.webm';
+import jdvideo from '../assets/jd.webm';
+// import snapscapevideo from '../assets/snapscape.webm';
+// import streamboxvideo from '../assets/streambox.webm';
 
-const projects = [
-  {
-    title: 'StreamBox',
-    description: 'A movie and show streaming plateform.',
-    image: streambox1,
-    tags: ['React', 'Node.js', 'Express', 'Postgresql'],
-    href: 'https://404-beryl.vercel.app/',
-    githubHref: "https://github.com/isamAhm/StreamBox_movies_and_shows_review_website"
-  },
-  {
-    title: 'PortGo',
-    description: 'A plateform for a company that creates websites.',
-    image: portgo,
-    tags: ['TypeScript', 'React', 'tailwindcss', 'Node.js'],
-    href: 'https://404-beryl.vercel.app/',
-    githubHref: "https://github.com/username/repository"
-  },
-  {
-    title: 'SkyCast',
-    description: 'A weather forcast web-app.',
-    image: skycast,
-    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
-    href: 'https://404-beryl.vercel.app/',
-    githubHref: "https://github.com/isamAhm/SkyCast_weather_app"
-  },
-  {
-    title: 'Tic Tac Toe',
-    description: 'A Tic Tac Toe game website.',
-    image: tictactoe,
-    tags: ['JavaScript', 'React', 'Machine-Learning', 'tailwindcss', 'Node.js'],
-    href: 'https://404-beryl.vercel.app/',
-    githubHref: "https://github.com/isamAhm/Gridlock_tic_tac_toe_game"
-  },
-  {
-    title: 'Dash',
-    description: 'A Stop watch websites.',
-    image: dash,
-    tags: ['JavaScript', 'React', 'tailwindcss'],
-    href: 'https://404-beryl.vercel.app/',
-    githubHref: "https://github.com/isamAhm/Dash_Stopwatch"
-  },
-  {
-    title: 'StreamBox-V2',
-    description: 'A movie and show streaming platform version-2.',
-    image: streambox2,
-    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
-    href: 'https://404-beryl.vercel.app/',
-    githubHref: "https://github.com/isamAhm/streambox_reactjs"
-  },
-  {
-    title: 'JD',
-    description: 'A sample aesthetic website',
-    image: jd2,
-    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
-    href: 'https://404-beryl.vercel.app/',
-    githubHref: "https://github.com/username/repository"
-  },
-  {
-    title: 'IsamDev.',
-    description: 'This is my personal Portfolio.',
-    image: portfolio,
-    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'TypeScript'],
-    href: 'https://www.isamahmed.duckdns.org/',
-    githubHref: "https://github.com/isamAhm/My_Portfolio"
-  },
-  {
-    title: 'Snapscape',
-    description: 'A sample website for inspiration, inspired by Pinterest.',
-    image: snapscape,
-    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
-    href: 'https://404-beryl.vercel.app/',
-    githubHref: "https://github.com/isamAhm/snapscape_next.js"
-  },
-];
-
-export function ProjectsSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  return (
-    <section 
-      
-      ref={sectionRef} 
-      className="min-h-screen bg-transparent py-20"
-    >
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-white mb-12 text-center">
-          Other Personal Projects
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:-mb-48">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+interface Project {
+  title: string;
+  description: string;
+  modalDescription?: string;
+  image: string;
+  tags: string[];
+  href: string;
+  githubHref?: string;
+  videoUrl?: string;
 }
 
-
-function ProjectDetail() {
-  return (
-    <div id="projects" className="min-h-screen bg-transparent text-white">
-
-     
-
-      {/* Projects Section */}
-      <div className="container mx-auto px-4 py-20 max-w-7xl">
-        <div className="space-y-8">
-          <DetailProjectCard 
-            title="HireSmart - ML-Powered Resume Screening"
-            description="An intelligent resume screening platform designed to streamline the recruitment process. It helps employers efficiently filter and evaluate candidate applications by automating the screening process. By leveraging machine learning models and advanced algorithms, HireSmart quickly identifies the most suitable candidates based on their resumes and job requirements, saving valuable time and resources for hiring managers."
-            image={hiresmart}
-            technologies={['React.js', 'Node.js', 'JavaScript', 'OpenAI API']}
-            liveUrl="https://hire-smart-v1.vercel.app/"
-            githubUrl="https://github.com/isamAhm/HireSmart_Frontend"
-          />
-          <DetailProjectCard 
-            title="Efoyat Doctor's Appointment"
-            description="A modern web-based platform designed to streamline doctor-patient interactions through an efficient appointment booking and management system. Unlike traditional methods, where appointments are often scheduled in-person visits, Efoyta allows patients to book appointments online from anywhere at their convenience. Doctors can manage their schedules, request lab checkups, and receive results digitally. Patients also receive their lab results through the platform, ensuring seamless communication and better patient care."
-            image={efoyta}
-            technologies={['React.js', 'Node.js', 'Redux', 'Express.js', 'MongoDB']}
-            liveUrl="https://efoyta.vercel.app/"
-            githubUrl="https://github.com/isamAhm/Efoyta_Doctors_Appointment"
-          />
-          <DetailProjectCard 
-            title="Cultural Restaurant Management"
-            description="A mobile app for a table reservation solution designed specifically for a local Ethiopian cultural restaurant. The project aims to simplify the process of managing table reservations and food ordering while offering a user-friendly experience for both administrators and customers. The system ensures smooth booking, enhances operational efficiency, and facilitates easy management of tables. With secure authentication and an intuitive interface, the system meets the unique needs of the restaurant while maintaining simplicity and efficiency, providing a complete dining experience."
-            image={mobile}
-            technologies={['Flutter', 'Express', 'REST', 'Node.js', 'MongoDB','Swift','Dart']}
-            liveUrl="https://404-beryl.vercel.app/"
-            githubUrl="https://github.com/FikreyohanesAbera/flutter-2024-proj"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-
-interface ProjectCardProps {
+interface DetailProject {
   title: string;
   description: string;
   image: string;
   technologies: string[];
   liveUrl: string;
   githubUrl: string;
+  videoUrl?: string;
+  onPlayClick: () => void;
 }
 
-function DetailProjectCard({ 
-  title, 
-  description, 
-  image, 
+interface VideoData {
+  videoUrl: string;
+  title: string;
+  tags: string[]; // Add this line
+  description: string;
+  
+}
+
+const projects: Project[] = [
+  {
+    title: 'StreamBox',
+    description: 'A movie and show streaming platform.',
+    modalDescription: 'StreamBox is a comprehensive streaming platform that allows users to watch movies and shows with a user-friendly interface. It features a robust backend with Node.js and Express, and a dynamic frontend built with React.', // Modal description
+    image: streambox1,
+    tags: ['React', 'Node.js', 'Express', 'Postgresql'],
+    href: 'https://404-beryl.vercel.app/',
+    githubHref: 'https://github.com/isamAhm/StreamBox_movies_and_shows_review_website',
+    videoUrl: videotry,
+  },
+  {
+    title: 'PortGo',
+    description: 'A platform for a company that creates websites.',
+    modalDescription: 'PortGo is a feature-rich platform designed for a company specializing in website creation. It provides an intuitive interface where users can browse services, explore templates, and request custom website development. Built with a modern tech stack including TypeScript, React, and Tailwind CSS for the frontend, and Node.js for the backend, PortGo ensures smooth performance and scalability. The platform offers seamless navigation, interactive UI components, and a responsive design to enhance the user experience',
+    image: portgo,
+    tags: ['TypeScript', 'React', 'tailwindcss', 'Node.js'],
+    href: 'https://404-beryl.vercel.app/',
+    githubHref: 'https://github.com/username/repository',
+    videoUrl: portgovideo,
+  },
+  {
+    title: 'SkyCast',
+    description: 'A weather forecast web-app.',
+    modalDescription: 'SkyCast is a dynamic weather forecast web application that provides real-time weather updates and weekly forecasts. Leveraging React for a seamless UI, and Node.js with Express for backend services, the app fetches accurate weather data from the OpenWeatherMap API. Users can view details such as temperature, humidity, wind speed, and air quality. MongoDB is used for storing user preferences and search history, enhancing personalization. The platform is optimized for both desktop and mobile users.',
+    image: skycast,
+    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
+    href: 'https://404-beryl.vercel.app/',
+    githubHref: 'https://github.com/isamAhm/SkyCast_weather_app',
+    videoUrl: skycastvideo,
+  },
+  {
+    title: 'Tic Tac Toe',
+    description: 'A Tic Tac Toe game website.',
+    modalDescription: 'Gridlock is a modern take on the classic Tic Tac Toe game with enhanced AI-driven gameplay. The game is built using JavaScript and React, incorporating Machine Learning algorithms to strengthen the AI opponent, making matches more challenging. The UI is styled with Tailwind CSS, ensuring a clean and responsive design. The game also features a winning highlight mechanism, multiplayer support, and a draw detection system for a well-rounded experience.',
+    image: tictactoe,
+    tags: ['JavaScript', 'React', 'Machine-Learning', 'tailwindcss', 'Node.js'],
+    href: 'https://404-beryl.vercel.app/',
+    githubHref: 'https://github.com/isamAhm/Gridlock_tic_tac_toe_game',
+    videoUrl: gridlockvideo,
+  },
+  {
+    title: 'Dash',
+    description: 'A Stop watch websites.',
+    modalDescription: 'Dash is a sleek and minimalistic stopwatch web application designed for precise time tracking. Developed with JavaScript and React, it offers a smooth, interactive experience with start, pause, reset, and lap time functionalities. The interface is crafted using Tailwind CSS, ensuring an elegant and user-friendly design. Dash is lightweight and optimized for fast performance, making it ideal for tracking activities, workouts, or study sessions.',
+    image: dash,
+    tags: ['JavaScript', 'React', 'tailwindcss'],
+    href: 'https://404-beryl.vercel.app/',
+    githubHref: 'https://github.com/isamAhm/Dash_Stopwatch',
+    videoUrl: dashvideo,
+  },
+  {
+    title: 'StreamBox-V2',
+    description: 'A movie and show streaming platform version-2.',
+    modalDescription: 'StreamBox-V2 is the second iteration of a comprehensive movie and show streaming platform, currently in development. This version is built with Next.js for enhanced performance, server-side rendering, and seamless navigation. The backend is powered by Node.js, Express, and MongoDB, ensuring efficient data handling and scalability. The platform aims to offer a rich collection of entertainment content where users can browse movies and shows, view detailed descriptions, and stream content effortlessly. It also includes personalized recommendations, an advanced search filter, and a scalable database structure to support future expansions.',
+    image: streambox2,
+    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
+    href: 'https://404-beryl.vercel.app/',
+    githubHref: 'https://github.com/isamAhm/streambox_reactjs',
+    videoUrl: videotry,
+  },
+  {
+    title: 'JD',
+    description: 'A sample aesthetic website',
+    modalDescription: 'JD is a visually appealing sample aesthetic website that showcases elegant UI design and smooth navigation. Built with React, Node.js, Express, and MongoDB, the platform demonstrates clean architecture and user-friendly layouts. The project serves as an inspiration for modern web design, emphasizing aesthetic appeal, typography, and fluid animations.',
+    image: jd2,
+    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
+    href: 'https://404-beryl.vercel.app/',
+    githubHref: 'https://github.com/username/repository',
+    videoUrl: jdvideo,
+  },
+  {
+    title: 'IsamDev.',
+    description: 'This is my personal Portfolio.',
+    modalDescription: 'IsamDev. is my personal portfolio website, showcasing my projects, skills, and professional journey. Built using React and TypeScript for a structured and scalable codebase, the backend is powered by Node.js and Express. The site features interactive animations, and a responsive design that adapts across all devices. It reflects my expertise in modern web development technologies.',
+    image: portfolio,
+    tags: ['React', 'Node.js', 'Express', 'TypeScript'],
+    href: 'https://www.isamahmed.duckdns.org/',
+    githubHref: 'https://github.com/isamAhm/My_Portfolio',
+    videoUrl: videotry,
+  },
+  {
+    title: 'Snapscape',
+    description: 'A sample website for inspiration, inspired by Pinterest.',
+    modalDescription: 'Snapscape is a visually captivating image-sharing platform inspired by Pinterest, designed for users to explore, upload, and share high-quality content. Built with Next.js and TypeScript for a modern and efficient frontend, the backend is powered by Node.js and Express, ensuring seamless performance. The platform enables users to upload images, create collections, and engage with a beautifully curated feed. With a responsive and intuitive UI, Snapscape delivers an optimal experience across all devices, making it an ideal space for digital inspiration and creativity.',
+    image: snapscape,
+    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
+    href: 'https://404-beryl.vercel.app/',
+    githubHref: 'https://github.com/isamAhm/snapscape_next.js',
+    videoUrl: videotry,
+  },
+];
+
+export const ProjectsSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [selectedVideo, setSelectedVideo] = useState<VideoData | null>(null);
+
+  return (
+    <section ref={sectionRef} className="min-h-screen bg-transparent py-20">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-4xl font-bold text-white mb-12 text-center">
+          Other Personal Projects
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:-mb-48">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              {...project}
+              onPlayClick={() => {
+                if (project.videoUrl) {
+                  setSelectedVideo({
+                    videoUrl: project.videoUrl,
+                    title: project.title,
+                    description: project.modalDescription || project.description, // Use modalDescription if available
+                    tags: project.tags,
+                  });
+                } else {
+                  console.warn(`No video URL for project: ${project.title}`);
+                }
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      <VideoModal
+        isOpen={!!selectedVideo}
+        onClose={() => setSelectedVideo(null)}
+        videoUrl={selectedVideo?.videoUrl}
+        title={selectedVideo?.title}
+        tags={selectedVideo?.tags}
+        description={selectedVideo?.description}
+      />
+    </section>
+  );
+};
+
+export const ProjectDetails = () => {
+  const [selectedVideo, setSelectedVideo] = useState<VideoData | null>(null);
+
+  return (
+    <div id="projects" className="min-h-screen bg-transparent text-white">
+      <div className="container mx-auto px-4 py-20 max-w-7xl">
+        <div className="space-y-8">
+          <DetailProjectCard
+            title="HireSmart - ML-Powered Resume Screening"
+            description="An intelligent resume screening platform designed to streamline the recruitment process. It helps employers efficiently filter and evaluate candidate applications by automating the screening process. By leveraging machine learning models and advanced algorithms, HireSmart quickly identifies the most suitable candidates based on their resumes and job requirements, saving valuable time and resources for hiring managers."
+            image={hiresmart}
+            technologies={['React.js', 'Node.js', 'JavaScript', 'OpenAI API']}
+            liveUrl="https://hire-smart-v1.vercel.app/"
+            githubUrl="https://github.com/isamAhm/HireSmart_Frontend"
+            videoUrl={videotry}
+            onPlayClick={() => setSelectedVideo({
+              videoUrl: videotry,
+              title: 'HireSmart - ML-Powered Resume Screening',
+              description: 'HireSmart leverages machine learning to automate resume screening, analyzing resumes against job requirements and scoring candidates. It is an intelligent resume screening platform designed to streamline the recruitment process. It helps employers efficiently filter and evaluate candidate applications by automating the screening process. By leveraging machine learning models and advanced algorithms, HireSmart quickly identifies the most suitable candidates based on their resumes and job requirements, saving valuable time and resources for hiring managers.',
+              tags: ['React.js', 'Node.js', 'JavaScript', 'OpenAI API'],
+            })}
+          />
+
+          <DetailProjectCard
+            title="Efoyat Doctor's Appointment"
+            description="A modern web-based platform designed to streamline doctor-patient interactions through an efficient appointment booking and management system. Unlike traditional methods, where appointments are often scheduled in-person visits, Efoyta allows patients to book appointments online from anywhere at their convenience. Doctors can manage their schedules, request lab checkups, and receive results digitally. Patients also receive their lab results through the platform, ensuring seamless communication and better patient care."
+            image={efoyta}
+            technologies={['React.js', 'Node.js', 'Redux', 'Express.js', 'MongoDB']}
+            liveUrl="https://efoyta.vercel.app/"
+            githubUrl="https://github.com/isamAhm/Efoyta_Doctors_Appointment"
+            videoUrl={videotry}
+            onPlayClick={() => setSelectedVideo({
+              videoUrl: videotry,
+              title: "Efoyat Doctor's Appointment",
+              description: 'Efoyta is a modern web-based platform designed to streamline doctor-patient interactions through an efficient appointment booking and management system. Unlike traditional methods, where appointments are often scheduled in-person visits, Efoyta allows patients to book appointments online from anywhere at their convenience. Doctors can manage their schedules, request lab checkups, and receive results digitally. Patients also receive their lab results through the platform, ensuring seamless communication and better patient care.',
+              tags: ['React.js', 'Node.js', 'Redux', 'Express.js', 'MongoDB'],
+            })}
+          />
+
+          <DetailProjectCard
+            title="Cultural Restaurant Management"
+            description="A mobile app for a table reservation solution designed specifically for a local Ethiopian cultural restaurant. The project aims to simplify the process of managing table reservations and food ordering while offering a user-friendly experience for both administrators and customers. The system ensures smooth booking, enhances operational efficiency, and facilitates easy management of tables. With secure authentication and an intuitive interface, the system meets the unique needs of the restaurant while maintaining simplicity and efficiency, providing a complete dining experience."
+            image={mobile}
+            technologies={['Flutter', 'Express', 'REST', 'Node.js', 'MongoDB', 'Swift', 'Dart']}
+            liveUrl="https://404-beryl.vercel.app/"
+            githubUrl="https://github.com/FikreyohanesAbera/flutter-2024-proj"
+            videoUrl={videotry}
+            onPlayClick={() => setSelectedVideo({
+              videoUrl: videotry,
+              title: 'Cultural Restaurant Management',
+              description: 'A mobile app for a table reservation solution designed specifically for a local Ethiopian cultural restaurant. The project aims to simplify the process of managing table reservations and food ordering while offering a user-friendly experience for both administrators and customers. The system ensures smooth booking, enhances operational efficiency, and facilitates easy management of tables. With secure authentication and an intuitive interface, the system meets the unique needs of the restaurant while maintaining simplicity and efficiency, providing a complete dining experience.',
+              tags: ['Flutter', 'Express', 'REST', 'Node.js', 'MongoDB', 'Swift', 'Dart'],
+            })}
+          />
+        </div>
+      </div>
+
+      <VideoModal
+        isOpen={!!selectedVideo}
+        onClose={() => setSelectedVideo(null)}
+        videoUrl={selectedVideo?.videoUrl}
+        title={selectedVideo?.title}
+        description={selectedVideo?.description}
+        tags={selectedVideo?.tags}
+      />
+    </div>
+  );
+};
+
+const DetailProjectCard = ({
+  title,
+  description,
+  image,
   technologies,
   liveUrl,
-  githubUrl 
-}: ProjectCardProps) {
+  githubUrl,
+  onPlayClick,
+}: DetailProject) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -227,10 +327,16 @@ function DetailProjectCard({
           >
             Code <Github size={14} className="ml-1.5" />
           </a>
+          <button 
+            onClick={onPlayClick}
+            className="inline-flex items-center px-3 py-1.5 bg-purple-500/20 text-purple-300 rounded-lg hover:bg-purple-500/30 transition-colors text-sm border border-purple-500/30"
+          >
+            Watch Demo <Play size={14} className="ml-1.5" />
+          </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default ProjectDetail;
+export default ProjectsSection;
