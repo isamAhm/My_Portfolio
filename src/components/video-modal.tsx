@@ -18,7 +18,7 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
       onClick={onClose}
     >
       <div
-        className="relative bg-gradient-to-br from-black via-gray-950 to-black rounded-xl max-w-4xl w-full h-[75vh] p-6 border border-blue-800 flex flex-col"
+        className="relative bg-gradient-to-br from-black via-gray-950 to-black rounded-xl max-w-4xl w-full h-[75vh] p-6 border border-blue-800 flex flex-col overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -30,11 +30,11 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
         </button>
         
         {videoUrl && (
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 aspect-video max-h-[40vh]">
             <video 
               src={videoUrl} 
               controls 
-              className="w-full rounded-lg"
+              className="w-full h-full rounded-lg object-cover"
               muted
               playsInline
             >
@@ -43,26 +43,26 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
           </div>
         )}
 
-        {/* Modified scrollable area */}
         <div 
-          className="mt-4 text-start flex-grow overflow-y-auto overscroll-contain pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700"
-          onWheel={(e) => e.stopPropagation()} // Prevent wheel events from bubbling
-          style={{ minHeight: 'min-content' }}
+          className="mt-4 flex flex-col gap-2 flex-grow overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700 scrollbar-gutter-stable"
+          onWheel={(e) => e.stopPropagation()}
         >
-          {title && <h3 className="text-2xl font-bold text-blue-600 mb-2">{title}</h3>}
-          {description && <p className="text-gray-300 text-start">{description}</p>}
-          <h3 className='text-lg font-semibold my-2 text-blue-600'>Technologies</h3>
+          {title && <h3 className="text-2xl font-bold text-blue-600">{title}</h3>}
+          {description && <p className="text-gray-300">{description}</p>}
           {tags && tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-4 justify-start">
-              {tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 bg-blue-500/10 text-blue-300 rounded-md text-xs border border-blue-500/20"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <>
+              <h3 className="text-lg font-semibold text-blue-600 mt-2">Technologies</h3>
+              <div className="flex flex-wrap gap-2">
+                {tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-2 py-1 bg-blue-500/10 text-blue-300 rounded-md text-xs border border-blue-500/20"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
