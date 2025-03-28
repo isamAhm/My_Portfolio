@@ -30,11 +30,11 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
         </button>
         
         {videoUrl && (
-          <div className="flex-shrink-0 aspect-video max-h-[40vh]">
+          <div className="flex-shrink-0">
             <video 
               src={videoUrl} 
               controls 
-              className="w-full h-full rounded-lg object-cover"
+              className="w-full rounded-lg"
               muted
               playsInline
             >
