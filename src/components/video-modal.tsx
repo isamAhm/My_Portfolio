@@ -17,8 +17,8 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
       className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
       onClick={onClose}
     >
-      <div
-        className="relative bg-gradient-to-br from-black via-gray-950 to-black rounded-xl max-w-4xl w-full h-[75vh] p-6 border border-blue-800 flex flex-col overflow-hidden"
+       <div
+        className="relative bg-gradient-to-br from-black via-gray-950 to-black rounded-xl max-w-4xl w-full h-[75vh] p-6 border border-blue-800 flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <button
