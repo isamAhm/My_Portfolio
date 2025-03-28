@@ -44,7 +44,7 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
         )}
 
         <div 
-          className="mt-4 flex flex-col gap-2 flex-grow overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700 scrollbar-gutter-stable"
+          className="flex flex-col gap-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700 scrollbar-gutter-stable mt-4 text-start flex-grow overflow-y-auto overscroll-contain pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700"
           onWheel={(e) => e.stopPropagation()}
         >
           {title && <h3 className="text-2xl font-bold text-blue-600">{title}</h3>}
