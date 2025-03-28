@@ -45,7 +45,7 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
 
         {/* Modified scrollable area */}
         <div 
-          className=" flex flex-col gap-2 flex-grow  scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700 scrollbar-gutter-stable mt-4 text-start overflow-y-auto overscroll-contain pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700"
+          className="mt-4 text-start flex-grow overflow-y-auto overscroll-contain pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700"
           onWheel={(e) => e.stopPropagation()} // Prevent wheel events from bubbling
           style={{ minHeight: 'min-content' }}
         >
