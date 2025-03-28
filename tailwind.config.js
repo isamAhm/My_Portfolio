@@ -28,11 +28,11 @@ export default {
         DEFAULT: "var(--radius)",
       },
       fontFamily: {
-        "press-start": ['"Press Start 2P"', "cursive"],
-        "fira-code": ['"Fira Code"', "cursive"],
-        blackOps: ['"Black Ops One"', "serif"],
-        zenDots: ['"Zen Dots"', "serif"],
-        lemonada: ['"Lemonada"', "serif"],
+        "press-start": ['"Press Start 2P"', "sans"],
+        "fira-code": ['"Fira Code"', "sans"],
+        blackOps: ['"Black Ops One"', "sans"],
+        zenDots: ['"Zen Dots"', "sans"],
+        lemonada: ['"Lemonada"', "sans"],
       },
       keyframes: {
         "alien-text": {
