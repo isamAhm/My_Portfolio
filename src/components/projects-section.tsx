@@ -17,11 +17,11 @@ import hiresmart from '../assets/hiresmart2.png';
 import efoyta from '../assets/efoyta.png';
 import mobile from '../assets/mobile1.png';
 import videotry from '../assets/video.mp4';
-import dashvideo from '../assets/dash.webm';
-import skycastvideo from '../assets/skycast.webm';
-import portgovideo from '../assets/portgo.webm';
-import gridlockvideo from '../assets/gridlock.webm';
-import jdvideo from '../assets/jd.webm';
+import dashvideo from '../assets/dash.mp4';
+import skycastvideo from '../assets/skycast.mp4';
+import portgovideo from '../assets/portgo.mp4';
+import gridlockvideo from '../assets/gridlock.mp4';
+import jdvideo from '../assets/jd.mp4';
 // import snapscapevideo from '../assets/snapscape.webm';
 // import streamboxvideo from '../assets/streambox.webm';
 
