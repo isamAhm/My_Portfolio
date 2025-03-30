@@ -12,7 +12,7 @@ import portgo from '../assets/portgo.png';
 import tictactoe from '../assets/tictactoe.png';
 import jd2 from '../assets/jd2.png';
 import portfolio from '../assets/portfolio.png';
-import snapscape from '../assets/snap.png';
+import snapscape from '../assets/snap.png'; 
 import hiresmart from '../assets/hiresmart2.png';
 import efoyta from '../assets/efoyta.png';
 import mobile from '../assets/mobile1.png';
