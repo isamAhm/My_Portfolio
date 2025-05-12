@@ -22,7 +22,9 @@ import skycastvideo from '../assets/skycast.mp4';
 import portgovideo from '../assets/portgo.mp4';
 import gridlockvideo from '../assets/gridlock.mp4';
 import jdvideo from '../assets/jd.mp4';
-// import snapscapevideo from '../assets/snapscape.webm';
+import fizzoravideo from '../assets/fizzora.webm';
+import fizzora from '../assets/fizzora.png';
+import streambox3 from '../assets/streambox_home.png';
 // import streamboxvideo from '../assets/streambox.webm';
 
 interface Project {
@@ -85,6 +87,16 @@ const projects: Project[] = [
     href: 'https://404-beryl.vercel.app/',
     githubHref: 'https://github.com/isamAhm/SkyCast_weather_app',
     videoUrl: skycastvideo,
+  },
+  {
+    title: 'Fizzora',
+    description: 'A sample soda drink landing page.',
+    modalDescription: 'A sample soda drink landing page designed to showcase a refreshing beverage. The project emphasizes a clean and modern design, utilizing next.js for interactive components and Tailwind CSS for responsive styling. The landing page features vibrant visuals, engaging animations, and clear calls to action, providing an inviting experience for users. It serves as a template for beverage brands looking to establish an online presence with a focus on aesthetics and user engagement.',
+    image: fizzora,
+    tags: ['TypeScript', 'next.js', 'tailwindcss', 'Node.js'],
+    href: 'https://isamahm.github.io/Fizzora_sample/',
+    githubHref: 'https://github.com/isamAhm/fizzora_sample',
+    videoUrl: fizzoravideo,
   },
   {
     title: 'Tic Tac Toe',
@@ -201,21 +213,21 @@ export const ProjectDetails = () => {
       <div className="container mx-auto px-4 py-20 max-w-7xl">
         <div className="space-y-8">
           <DetailProjectCard
-            title="HireSmart - ML-Powered Resume Screening"
-            description="An intelligent resume screening platform designed to streamline the recruitment process. It helps employers efficiently filter and evaluate candidate applications by automating the screening process. By leveraging machine learning models and advanced algorithms, HireSmart quickly identifies the most suitable candidates based on their resumes and job requirements, saving valuable time and resources for hiring managers."
-            image={hiresmart}
-            technologies={['React.js', 'Node.js', 'JavaScript', 'OpenAI API']}
-            liveUrl="https://hire-smart-v1.vercel.app/"
-            githubUrl="https://github.com/isamAhm/HireSmart_Frontend"
+            title="StreamBox"
+            description="StreamBox is a comprehensive movie and TV show streaming platform designed to deliver a smooth and engaging user experience. It features a dynamic, responsive frontend built with Next.js, offering fast navigation and server-side rendering for optimal performance. The backend is powered by Node.js, MongoDB, and Prisma, providing a scalable and efficient infrastructure for content management, user authentication, and seamless streaming."
+            image={streambox3}
+            technologies={['Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'Prisma']}
+            liveUrl="https://streambox-final-streaming.vercel.app/home"
+            githubUrl="https://github.com/isamAhm/"
             videoUrl={videotry}
             onPlayClick={() => setSelectedVideo({
               videoUrl: videotry,
-              title: 'HireSmart - ML-Powered Resume Screening',
-              description: 'HireSmart leverages machine learning to automate resume screening, analyzing resumes against job requirements and scoring candidates. It is an intelligent resume screening platform designed to streamline the recruitment process. It helps employers efficiently filter and evaluate candidate applications by automating the screening process. By leveraging machine learning models and advanced algorithms, HireSmart quickly identifies the most suitable candidates based on their resumes and job requirements, saving valuable time and resources for hiring managers.',
-              tags: ['React.js', 'Node.js', 'JavaScript', 'OpenAI API'],
+              title: 'StreamBox',
+              description: 'StreamBox is a comprehensive movie and TV show streaming platform designed to deliver a smooth and engaging user experience. It features a dynamic, responsive frontend built with Next.js, offering fast navigation and server-side rendering for optimal performance. The backend is powered by Node.js, MongoDB, and Prisma, providing a scalable and efficient infrastructure for content management, user authentication, and seamless streaming.',
+              tags: ['Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'Prisma'],
             })}
           />
-
+          
           <DetailProjectCard
             title="Efoyat Doctor's Appointment"
             description="A modern web-based platform designed to streamline doctor-patient interactions through an efficient appointment booking and management system. Unlike traditional methods, where appointments are often scheduled in-person visits, Efoyta allows patients to book appointments online from anywhere at their convenience. Doctors can manage their schedules, request lab checkups, and receive results digitally. Patients also receive their lab results through the platform, ensuring seamless communication and better patient care."
@@ -231,7 +243,24 @@ export const ProjectDetails = () => {
               tags: ['React.js', 'Node.js', 'Redux', 'Express.js', 'MongoDB'],
             })}
           />
+          
 
+          <DetailProjectCard
+            title="HireSmart - ML-Powered Resume Screening"
+            description="An intelligent resume screening platform designed to streamline the recruitment process. It helps employers efficiently filter and evaluate candidate applications by automating the screening process. By leveraging machine learning models and advanced algorithms, HireSmart quickly identifies the most suitable candidates based on their resumes and job requirements, saving valuable time and resources for hiring managers."
+            image={hiresmart}
+            technologies={['React.js', 'Node.js', 'JavaScript', 'OpenAI API']}
+            liveUrl="https://hire-smart-v1.vercel.app/"
+            githubUrl="https://github.com/isamAhm/HireSmart_Frontend"
+            videoUrl={videotry}
+            onPlayClick={() => setSelectedVideo({
+              videoUrl: videotry,
+              title: 'HireSmart - ML-Powered Resume Screening',
+              description: 'HireSmart leverages machine learning to automate resume screening, analyzing resumes against job requirements and scoring candidates. It is an intelligent resume screening platform designed to streamline the recruitment process. It helps employers efficiently filter and evaluate candidate applications by automating the screening process. By leveraging machine learning models and advanced algorithms, HireSmart quickly identifies the most suitable candidates based on their resumes and job requirements, saving valuable time and resources for hiring managers.',
+              tags: ['React.js', 'Node.js', 'JavaScript', 'OpenAI API'],
+            })}
+          />
+          
           <DetailProjectCard
             title="Cultural Restaurant Management"
             description="A mobile app for a table reservation solution designed specifically for a local Ethiopian cultural restaurant. The project aims to simplify the process of managing table reservations and food ordering while offering a user-friendly experience for both administrators and customers. The system ensures smooth booking, enhances operational efficiency, and facilitates easy management of tables. With secure authentication and an intuitive interface, the system meets the unique needs of the restaurant while maintaining simplicity and efficiency, providing a complete dining experience."
