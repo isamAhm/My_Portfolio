@@ -1,8 +1,10 @@
 import { Briefcase, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 function Experience() {
+  const { theme } = useTheme();
   const experiences = [
     {
       role: "Full Stack Developer",
@@ -62,7 +64,9 @@ function Experience() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-2 mb-8">
             <Briefcase className="w-6 h-6 text-blue-600" />
-            <h2 className="text-3xl font-bold text-white">Professional Experience</h2>
+            <h2 className={`text-3xl font-bold ${
+              theme === 'dark' ? 'text-white' : 'text-black'
+            }`}>Professional Experience</h2>
           </div>
           
           <div className="relative space-y-8">
@@ -93,7 +97,7 @@ function Experience() {
                   delay: 0.5 + index * 0.15,
                   ease: "easeOut"
                 }}
-                className="backdrop-blur-md z-10 border border-blue-700 p-6 rounded-xl transition-all duration-300 relative group hover:shadow-xl hover:shadow-blue-950/30 ml-8 md:ml-0"
+                className={`backdrop-blur-md z-10 border border-blue-700 p-6 rounded-xl transition-all duration-300 relative group hover:shadow-xl hover:shadow-blue-950/30 ml-8 md:ml-0 ${theme === 'dark' ? '' : 'bg-gradient-to-br from-white via-blue-200 to-white'}`}
               >
                 {/* Timeline Bullet */}
                 <div className="absolute -left-0 md:-left-0 top-6 w-8 h-8 flex items-center justify-center transform -translate-x-1/2">
@@ -104,22 +108,28 @@ function Experience() {
 
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-white">{experience.role}</h3>
-                    <p className="text-blue-400 font-medium mt-1">{experience.company}</p>
+                    <h3 className={`text-xl font-bold ${
+                      theme === 'dark' ? 'text-white' : 'text-black'
+                    }`}>{experience.role}</h3>
+                    <p className={`text-blue-400 font-medium mt-1 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-900'}`}>{experience.company}</p>
                   </div>
-                  <div className="flex text-blue-300 mt-2 md:mt-0">
-                      <p className="text-blue-300 bg-blue-900/30 px-3 py-1 rounded-full text-sm">
+                  <div className={`flex mt-2 md:mt-0 ${theme === 'dark' ? 'text-blue-300' : 'text-blue-900'}`}>
+                      <p className={` px-3 py-1 rounded-full text-sm ${theme === 'dark' ? 'bg-blue-900/30 text-blue-300 ' : 'bg-blue-900 text-white '} `}>
                         {experience.period}
                       </p>
                       <p className='text-sm px-3 content-center'>| {experience.location}</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-4">{experience.description}</p>
+                <p className={`${
+                  theme === 'dark' ? 'text-gray-300' : 'text-black'
+                } mb-4`}>{experience.description}</p>
                 <ul className="space-y-2">
                   {experience.achievements.map((achievement, achievementIndex) => (
                     <li key={achievementIndex} className="flex items-start gap-2">
                       <ChevronRight className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-white">{achievement}</span>
+                      <span className={theme === 'dark' ? 'text-white' : 'text-black'}>
+                        {achievement}
+                      </span>
                     </li>
                   ))}
                 </ul>

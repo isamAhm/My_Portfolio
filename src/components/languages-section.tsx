@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { LangBar } from './skill-Bar';
 import React from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 const langs = [
   { name: 'Amharic', proficiency: 100, level: 'Native' },
@@ -12,6 +13,7 @@ const langs = [
 
 
 function LanguageSection() {
+  const {theme} = useTheme()
   return (
     <div>
       <div className="max-w-6xl mx-auto px-4 mt-16">
@@ -23,8 +25,8 @@ function LanguageSection() {
           
           className="text-left mb-16"
         >
-          <h2 className="text-4xl font-bold mb-6 text-white">Languages</h2>
-          <p className="text-xl text-gray-300">
+          <h2 className={`text-4xl font-bold mb-6  ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Languages</h2>
+          <p className={`text-xl  ${ theme === 'dark' ? 'text-gray-300' : 'text-gray-950'}`}>
             Language proficiency and expertise
           </p>
         </motion.div>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 interface NavLinksProps {
   className?: string;
@@ -25,13 +26,11 @@ function getRandomCharacter() {
 
 // Function to create an event handler for hover effects
 function createEventHandler() {
-  let isInProgress = false; // Track if the effect is already running
-  const BASE_DELAY = 70; // Delay between text updates
+  let isInProgress = false;
+  const BASE_DELAY = 70;
 
-  return function handleHoverEvent(e: MouseEvent) {
-    if (isInProgress) {
-      return;
-    }
+  return function handleHoverEvent(e: Event) {
+    if (isInProgress) return;
 
     const target = e.target as HTMLElement;
     const text = target.innerText;
@@ -56,6 +55,8 @@ function createEventHandler() {
 }
 
 export function NavLinks({ className = '', onClick }: NavLinksProps) {
+  const { theme } = useTheme();
+
   useEffect(() => {
     // Add hover effect to all elements with the class `.text-hover-effect`
     const elements = document.querySelectorAll('.text-hover-effect');
@@ -79,7 +80,9 @@ export function NavLinks({ className = '', onClick }: NavLinksProps) {
         <motion.li key={href} whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
           <a
             href={href}
-            className="text-hover-effect text-gray-300 transition-colors hover:text-blue-400"
+            className={`text-hover-effect transition-colors hover:text-blue-400 ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-700 hover:text-blue-900 max-md:text-white'
+            }`}
             onClick={onClick}
           >
             {label}

@@ -11,6 +11,7 @@ import image1 from '../assets/tictactoe.png';
 import image2 from '../assets/streambox1.png';
 import image3 from '../assets/portgo.png';
 import image4 from '../assets/snap.png';
+import { useTheme } from "@/context/ThemeContext";
 
 export const SmoothScrollHero = () => {
   return (
@@ -50,10 +51,11 @@ const Hero: React.FC = () => {
 
 
 const ProjectText: React.FC = () => {
+    const { theme } = useTheme();
     
     return (
       <div className="relative">
-          <h1 className="text-4xl text-center mt-8 font-fira-code font-bold ">🏖️ Lets see my projects</h1>
+          <h1 className={`text-4xl text-center mt-8 font-fira-code font-bold ${theme === 'dark' ? '' : 'text-black'}`}>🏖️ Lets see my projects</h1>
         
         <div className="absolute bottom-0 left-0 right-0 h-96 bg-transparent" />
       </div>
@@ -65,6 +67,7 @@ const ProjectText: React.FC = () => {
 
 
 const ParallaxImages = () => {
+    const { theme } = useTheme();
     return (
       <div className="mx-auto max-w-5xl px-4 pt-[200px]">
         <ParallaxImg
@@ -72,28 +75,28 @@ const ParallaxImages = () => {
           alt="And example of a space launch"
           start={-200}
           end={200}
-          className="w-1/3"
+          className={`w-1/3 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
         />
         <ParallaxImg
           src={image2} // Use imported image
           alt="An example of a space launch"
           start={200}
           end={-250}
-          className="mx-auto w-2/3"
+          className={`mx-auto w-2/3 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
         />
         <ParallaxImg
           src={image3} // Use imported image
           alt="Orbiting satellite"
           start={-200}
           end={200}
-          className="ml-auto w-1/3"
+          className={`ml-auto w-1/3 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
         />
         <ParallaxImg
           src={image4} // Use imported image
           alt="Orbiting satellite"
           start={0}
           end={-500}
-          className="ml-24 w-5/12"
+          className={`ml-24 w-5/12 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
         />
       </div>
     );

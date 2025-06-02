@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import { ProjectCard } from './project-card';
 import { VideoModal } from './video-modal';
 import { Github, ExternalLink, Play } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 // Project Assets
 import streambox1 from '../assets/streambox1.png';
@@ -163,13 +165,26 @@ const projects: Project[] = [
 export const ProjectsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedVideo, setSelectedVideo] = useState<VideoData | null>(null);
+  const { theme } = useTheme();
 
   return (
     <section ref={sectionRef} className="min-h-screen bg-transparent py-20">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-white mb-12 text-center">
-          Other Personal Projects
-        </h2>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className={`text-4xl font-bold mb-6 ${
+            theme === 'dark' ? 'text-gray-300' : 'text-black'
+          }`}>Other Personal Projects</h2>
+          <p className={`text-xl ${
+            theme === 'dark' ? 'text-gray-300' : 'text-black'
+          }`}>
+            A showcase of my other work and personal projects
+          </p>
+        </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:-mb-48">
           {projects.map((project) => (
@@ -207,9 +222,10 @@ export const ProjectsSection = () => {
 
 export const ProjectDetails = () => {
   const [selectedVideo, setSelectedVideo] = useState<VideoData | null>(null);
+  const { theme } = useTheme();
 
   return (
-    <div id="projects" className="min-h-screen bg-transparent text-white">
+    <div id="projects" className={`min-h-screen bg-transparent  ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
       <div className="container mx-auto px-4 py-20 max-w-7xl">
         <div className="space-y-8">
           <DetailProjectCard
@@ -301,10 +317,11 @@ const DetailProjectCard = ({
   onPlayClick,
 }: DetailProject) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { theme } = useTheme();
 
   return (
     <div 
-      className="flex max-md:-mt-96 flex-col md:flex-row gap-6 bg-transparent rounded-xl overflow-hidden border border-spacing-60 border-blue-950 hover:border-blue-500/30 transition-all duration-300 group relative bg-gray-800 transform-gpu hover:shadow-blue-950 hover:shadow-lg"
+      className={`flex max-md:-mt-96 flex-col md:flex-row gap-6 rounded-xl overflow-hidden border border-spacing-60 border-blue-950 hover:border-blue-500/30 transition-all duration-300 group relative transform-gpu hover:shadow-blue-950 hover:shadow-lg ${theme === 'dark' ? 'bg-transparent' : 'bg-gradient-to-br from-white via-blue-200 to-white backdrop-blur-md'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -316,7 +333,7 @@ const DetailProjectCard = ({
           className={`w-full h-64 md:h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
         />
         {/* Dark Overlay */}
-        <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-[#030711] to-transparent"></div>
+        <div className={`absolute inset-y-0 right-0 w-1/3  ${theme === 'dark' ? 'bg-gradient-to-l from-[#030711] to-transparent' : 'bg-gradient-to-l from-gray-500/20 to-transparent'} `}></div>
       </div>
 
       {/* Content */}
@@ -324,7 +341,7 @@ const DetailProjectCard = ({
         <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
           {title}
         </h3>
-        <p className="text-gray-300 text-sm leading-relaxed">
+        <p className={` text-sm leading-relaxed ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
           {description}
         </p>
         
@@ -332,7 +349,7 @@ const DetailProjectCard = ({
           {technologies.map((tech, index) => (
             <span 
               key={index}
-              className="px-2 py-1 bg-blue-500/10 text-blue-300 rounded-md text-xs border border-blue-500/20"
+              className={`px-2 py-1 bg-blue-500/10  rounded-md text-xs border border-blue-500/20 ${theme === 'dark' ? 'text-blue-300' : 'text-black'}`}
             >
               {tech}
             </span>
@@ -344,7 +361,7 @@ const DetailProjectCard = ({
             href={liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-3 py-1.5 bg-blue-500/20 text-blue-300 rounded-lg hover:bg-blue-500/30 transition-colors text-sm border border-blue-500/30"
+            className={`inline-flex items-center px-3 py-1.5 bg-blue-500/20  rounded-lg hover:bg-blue-500/30 transition-colors text-sm border border-blue-500/30 ${theme === 'dark' ? 'text-blue-300' : 'text-black'}`}
           >
             Live Demo <ExternalLink size={14} className="ml-1.5" />
           </a>
@@ -352,13 +369,13 @@ const DetailProjectCard = ({
             href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-3 py-1.5 bg-gray-700/50 text-gray-300 rounded-lg hover:bg-gray-700/70 transition-colors text-sm border border-gray-600/30"
+            className={`inline-flex items-center px-3 py-1.5 bg-gray-700/50  rounded-lg hover:bg-gray-700/70 transition-colors text-sm border border-gray-600/30 ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}
           >
             Code <Github size={14} className="ml-1.5" />
           </a>
           <button 
             onClick={onPlayClick}
-            className="inline-flex items-center px-3 py-1.5 bg-purple-500/20 text-purple-300 rounded-lg hover:bg-purple-500/30 transition-colors text-sm border border-purple-500/30"
+            className={`inline-flex items-center px-3 py-1.5 bg-purple-500/20 rounded-lg hover:bg-purple-500/30 transition-colors text-sm border border-purple-500/30 ${ theme === 'dark' ? 'text-purple-300' : 'text-black'}`}
           >
             Watch Demo <Play size={14} className="ml-1.5" />
           </button>

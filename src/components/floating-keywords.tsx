@@ -1,3 +1,4 @@
+import { useTheme } from '@/context/ThemeContext';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useRef } from 'react';
@@ -9,6 +10,7 @@ const keywords = [
 
 export function FloatingKeywords() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
 
   useGSAP(() => {
     const elements = containerRef.current?.children;
@@ -33,9 +35,9 @@ export function FloatingKeywords() {
       {keywords.map((keyword, i) => (
         <div
           key={keyword}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full 
-                     bg-gray-800 px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 
-                     hover:text-white"
+          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full 
+                     px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 backdrop-blur-lg  
+                     hover:text-white ${theme === 'dark' ? ' bg-gray-800/10 shadow-sm shadow-blue-900' : 'bg-gray-900/80 border-blue-800 border'}`}
           style={{
             transform: `translate(${Math.sin(i) * 100}px, ${Math.cos(i) * 100}px)`,
           }}

@@ -5,6 +5,7 @@ import { Mail } from 'lucide-react';
 import { Button } from './ui/button';
 import { Github, Linkedin } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import { useTheme } from '@/context/ThemeContext';
 
 // Allowed characters for the randomization effect
 const allowedCharacters = ['X', '$', 'Y', '#', '?', '*', '0', '1', '+'];
@@ -46,7 +47,7 @@ export function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSending, setIsSending] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState('');
-
+  const {theme} = useTheme()
   useGSAP(() => {
     const inputs = formRef.current?.querySelectorAll('input, textarea, button');
     if (!inputs) return;
@@ -111,51 +112,51 @@ export function ContactSection() {
   return (
     <section id="contact" ref={sectionRef} className="min-h-screen bg-transparent py-20 pt-48">
       <div className="mx-auto max-w-3xl px-4">
-        <h2 className="mb-12 text-center text-4xl font-bold text-white">Let's Connect</h2>
+        <h2 className={`mb-12 text-center text-4xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Let's Connect</h2>
         <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="name" className={`block text-sm font-medium  ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
               Name
             </label>
             <input
               type="text"
               name="name"
               id="name"
-              className="mt-1 block w-full rounded-lg border-gray-600 bg-gray-800 p-3 text-white 
-                       placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
+              className={`mt-1 block w-full rounded-lg border-gray-600  p-3  
+                        focus:border-blue-500 focus:ring-blue-500 ${theme === 'dark' ? 'placeholder-gray-400 bg-gray-800 text-white' : 'placeholder-gray-700 bg-gray-300 text-black'}`}
               placeholder="Your name"
               required
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="email" className={`block text-sm font-medium  ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
               Email
             </label>
             <input
               type="email"
               name="email"
               id="email"
-              className="mt-1 block w-full rounded-lg border-gray-600 bg-gray-800 p-3 text-white 
-                       placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
+              className={`mt-1 block w-full rounded-lg border-gray-600  p-3
+                        focus:border-blue-500 focus:ring-blue-500 ${theme === 'dark' ? 'placeholder-gray-400 bg-gray-800 text-white' : 'placeholder-gray-700 bg-gray-300 text-black'}`}
               placeholder="your@email.com"
               required
             />
           </div>
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="message" className={`block text-sm font-medium  ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
               Message
             </label>
             <textarea
               name="message"
               id="message"
               rows={10}
-              className="mt-1 block w-full rounded-lg border-gray-600 bg-gray-800 p-3 text-white 
-                       placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 resize-none"
+              className={`mt-1 block w-full rounded-lg border-gray-600  p-3  
+                        focus:border-blue-500 focus:ring-blue-500 resize-none ${theme === 'dark' ? 'bg-gray-800 text-white placeholder-gray-400' : 'placeholder-gray-700 bg-gray-300 text-black'}`}
               placeholder="Your message..."
               required
             />
           </div>
-          <Button type="submit" size="lg" disabled={isSending} className="w-full hover:shadow-lg hover:shadow-blue-950 group">
+          <Button type="submit" size="lg" disabled={isSending} className={`w-full hover:shadow-lg hover:shadow-blue-950 group ${theme === 'dark' ? '' : 'bg-gray-900 text-white'}`}>
             <span className="relative flex items-center gap-2">
               <span className="text-hover-effect">
                 {isSending ? 'Sending...' : 'Send Message'}
@@ -171,7 +172,7 @@ export function ContactSection() {
           href="https://github.com/isamAhm"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-400 transition-colors hover:text-white"
+          className={` transition-colors ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-700 hover:text-blue-600'}`}
         >
           <Github size={24} />
         </a>
@@ -179,7 +180,7 @@ export function ContactSection() {
           href="https://www.linkedin.com/in/isam-ahmed-b0b980306"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-400 transition-colors hover:text-white"
+          className={` transition-colors ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-700 hover:text-blue-600'}`}
         >
           <Linkedin size={24} />
         </a>

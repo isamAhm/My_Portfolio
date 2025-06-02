@@ -4,10 +4,12 @@ import { useEffect, useRef } from 'react';
 import { Code, Github, Linkedin, Mail } from 'lucide-react';
 import gsap from 'gsap';
 import { useFollowCursor } from '../hooks/useFollowCursor';
+import { useTheme } from '../../context/ThemeContext';
 
 export function HeroContent() {
   const ref = useRef<HTMLDivElement>(null);
   const dynamicTextRef = useRef<HTMLSpanElement>(null);
+  const { theme } = useTheme();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 700px", "end 200px"],
@@ -109,30 +111,32 @@ export function HeroContent() {
           duration: 0.5,
           ease: 'power2.out',
           onComplete: () => {
-            currentIndex = (currentIndex + 1) % texts.length;
-            const newText = texts[currentIndex];
+            if (dynamicTextRef.current) {
+              currentIndex = (currentIndex + 1) % texts.length;
+              const newText = texts[currentIndex];
 
-            // Check if the text is in Arabic
-            const isArabic = /[\u0600-\u06FF]/.test(newText);
+              // Check if the text is in Arabic
+              const isArabic = /[\u0600-\u06FF]/.test(newText);
 
-            // Apply the appropriate class
-            if (isArabic) {
-              dynamicTextRef.current.classList.add('font-lemonada');
-              dynamicTextRef.current.classList.remove('font-zenDots');
-            } else {
-              dynamicTextRef.current.classList.add('font-zenDots');
-              dynamicTextRef.current.classList.remove('font-lemonada');
+              // Apply the appropriate class
+              if (isArabic) {
+                dynamicTextRef.current.classList.add('font-lemonada');
+                dynamicTextRef.current.classList.remove('font-zenDots');
+              } else {
+                dynamicTextRef.current.classList.add('font-zenDots');
+                dynamicTextRef.current.classList.remove('font-lemonada');
+              }
+
+              // Update the text content
+              dynamicTextRef.current.textContent = newText;
+
+              // Fade in the new text
+              gsap.to(dynamicTextRef.current, {
+                opacity: 0.6,
+                duration: 0.5,
+                ease: 'power2.in',
+              });
             }
-
-            // Update the text content
-            dynamicTextRef.current.textContent = newText;
-
-            // Fade in the new text
-            gsap.to(dynamicTextRef.current, {
-              opacity: 0.6,
-              duration: 0.5,
-              ease: 'power2.in',
-            });
           },
         });
       }
@@ -149,9 +153,9 @@ export function HeroContent() {
     >
       <h1 className="font-fira-code text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-relaxed">
         {/* Emoji with a different style */}
-        <span className="text-white">🚀</span>
+        <span className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>🚀</span>
         {/* Apply text-gradient only to "Isam Ahmed" */}
-        <span className="text-[#55ACEE] opacity-80">
+        <span className={theme === 'dark' ? 'text-[#55ACEE] opacity-80' : 'text-gray-900'}>
           {' Isam Ahmed'.split('').map((char, i) => (
             <span key={i} className="char inline-block relative">
               {char === ' ' ? '\u00A0' : char}
@@ -161,13 +165,16 @@ export function HeroContent() {
       </h1>
       <span
         ref={dynamicTextRef}
-        className="opacity-0 text-gradient hover:tracking-widest transition-all ease-in-out duration-500 home-hero-subheading text-3xl font-zenDots change"
-        
+        className={`hover:tracking-widest transition-all ease-in-out duration-500 home-hero-subheading text-3xl font-zenDots change ${
+          theme === 'dark' ? 'text-gradient opacity-0' : 'text-gray-950'
+        }`}
       >
         Software Engineer
       </span>
-      <p className="mt-6 font-fira-code text-lg sm:text-lg text-gray-400">
-      Crafting digital experiences that bring your vision to life. <br className='max-sm:hidden'/> I translate ideas into clean, efficient code, building the future of your online presence.
+      <p className={`mt-6 font-fira-code text-lg sm:text-lg ${
+        theme === 'dark' ? 'text-gray-400' : 'text-gray-900'
+      }`}>
+        Crafting digital experiences that bring your vision to life. <br className='max-sm:hidden'/> I translate ideas into clean, efficient code, building the future of your online presence.
       </p>
       <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
         <a href="#projects">
@@ -192,7 +199,11 @@ export function HeroContent() {
           href="https://github.com/isamAhm"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-400 transition-colors hover:text-white"
+          className={`transition-colors ${
+            theme === 'dark' 
+              ? 'text-gray-400 hover:text-white' 
+              : 'text-gray-600 hover:text-gray-900'
+          }`}
         >
           <Github size={24} />
         </a>
@@ -200,7 +211,11 @@ export function HeroContent() {
           href="https://www.linkedin.com/in/isam-ahmed-b0b980306"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-400 transition-colors hover:text-white"
+          className={`transition-colors ${
+            theme === 'dark' 
+              ? 'text-gray-400 hover:text-white' 
+              : 'text-gray-600 hover:text-gray-900'
+          }`}
         >
           <Linkedin size={24} />
         </a>

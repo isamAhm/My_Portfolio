@@ -1,3 +1,4 @@
+import { useTheme } from "@/context/ThemeContext";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
@@ -12,6 +13,7 @@ const HorizontalText = () => {
 const HorizontalScrollCarousel = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const {theme} = useTheme()
 
   // Check screen width on mount and resize
   useEffect(() => {
@@ -40,7 +42,7 @@ const HorizontalScrollCarousel = () => {
     <section ref={targetRef} className="relative h-[70vh] bg-transparent z-10">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div style={{ x }} className="flex items-center whitespace-nowrap">
-          <p className="text-6xl font-black uppercase text-neutral-200 font-zenDots max-md:text-3xl">
+          <p className={`text-6xl font-black uppercase font-zenDots max-md:text-3xl ${theme === 'dark' ? 'text-neutral-200' : 'text-blue-950'}`}>
             {sentence}
           </p>
         </motion.div>

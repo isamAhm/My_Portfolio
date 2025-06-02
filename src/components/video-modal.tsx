@@ -1,3 +1,4 @@
+import { useTheme } from '@/context/ThemeContext';
 import { X } from 'lucide-react';
 
 interface VideoModalProps {
@@ -10,15 +11,15 @@ interface VideoModalProps {
 }
 
 export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags }: VideoModalProps) => {
+  const {theme} = useTheme();
   if (!isOpen) return null;
-
   return (
     <div
       className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
       onClick={onClose}
     >
        <div
-        className="relative bg-gradient-to-br from-black via-gray-950 to-black rounded-xl max-w-4xl w-full h-[75vh] p-6 border border-blue-800 flex flex-col"
+        className={`relative  rounded-xl max-w-4xl w-full h-[75vh] p-6 border border-blue-800 flex flex-col ${theme === 'dark' ? 'bg-gradient-to-br from-black via-gray-950 to-black' : 'bg-gradient-to-br from-white via-blue-200 to-white backdrop-blur-md'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -48,7 +49,7 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
           onWheel={(e) => e.stopPropagation()}
         >
           {title && <h3 className="text-2xl font-bold text-blue-600">{title}</h3>}
-          {description && <p className="text-gray-300">{description}</p>}
+          {description && <p className={` ${theme === 'dark' ? 'text-gray-300' : 'text-gray-950'}`}>{description}</p>}
           {tags && tags.length > 0 && (
             <>
               <h3 className="text-lg font-semibold text-blue-600 mt-2">Technologies</h3>
@@ -56,7 +57,7 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
                 {tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-2 py-1 bg-blue-500/10 text-blue-300 rounded-md text-xs border border-blue-500/20"
+                    className={`px-2 py-1  rounded-md text-xs border border-blue-500/20 ${theme === 'dark' ? 'bg-blue-500/10 text-blue-300' : 'bg-blue-500/40 text-black'}`}
                   >
                     {tag}
                   </span>

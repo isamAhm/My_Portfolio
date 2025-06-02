@@ -3,6 +3,7 @@ import {
   Code2, Database, Globe, Layout, Server, Smartphone, User, Workflow,
 } from 'lucide-react';
 import { SkillBar } from './skill-Bar';
+import { useTheme } from '@/context/ThemeContext';
 
 const skills = [
   { icon: <Code2 size={20} />, name: 'Frontend Development', level: 95 },
@@ -18,6 +19,8 @@ const skills = [
 
 
 export function SkillsSection() {
+  const { theme } = useTheme();
+  
   return (
     <section className="py-20 bg-transparent" id="skills">
       <div className="max-w-6xl mx-auto px-4">
@@ -29,8 +32,11 @@ export function SkillsSection() {
           
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-6 text-white">Skills</h2>
-          <p className="text-xl text-gray-300">
+          <h2 className={`text-4xl font-bold mb-6 ${
+        theme === 'dark' ? 'text-gray-300' : 'text-black'
+      }`}>Skills</h2>
+          <p className={`text-xl  ${ 
+            theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
             Expertise across the full stack of modern web development
           </p>
         </motion.div>

@@ -9,17 +9,19 @@ import {
     Github, SquareCode,
     BugPlay
   } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
 
 function TechnicalSkillSection() {
+  const {theme} = useTheme()
   return (
     <div className='bg-transparent'>
       <section className="py-16 px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-2 mb-8">
             <Code2 className="w-6 h-6 text-blue-600" />
-            <h2 className="text-3xl font-bold text-white">Technologies</h2>
+            <h2 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Technologies</h2>
           </div>
-          <p className='text-xl mb-8'>Here are the technologies I am proficient in:</p>
+          <p className={`text-xl mb-8 ${theme === 'dark' ? '' : 'text-gray-950'}`}>Here are the technologies I am proficient in:</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
@@ -118,7 +120,7 @@ function TechnicalSkillSection() {
                 ]
               }
             ].map((category, index) => (
-              <div key={index} className="bg-transparent hover:shadow-blue-950 hover:shadow-lg text-white border border-blue-700 p-6 rounded-xl transition-shadow hover:-translate-y-1 hover:scale-[101%] hover:ease-in-out hover:transition-transform hover:duration-500">
+              <div key={index} className={`bg-transparent hover:shadow-blue-950 hover:shadow-lg text-white border border-blue-700 p-6 rounded-xl transition-shadow hover:-translate-y-1 hover:scale-[101%] hover:ease-in-out hover:transition-transform hover:duration-500 ${theme === 'dark' ? 'bg-transparent' : 'bg-gradient-to-br from-black via-blue-950 to-blue-900 backdrop-blur-md'}`}>
                 <div className="flex items-center gap-2 mb-4">
                   {category.icon}
                   <h3 className="text-xl font-semibold text-white">{category.category}</h3>
