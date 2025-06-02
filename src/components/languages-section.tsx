@@ -6,7 +6,7 @@ import { useTheme } from '@/context/ThemeContext';
 const langs = [
   { name: 'Amharic', proficiency: 100, level: 'Native' },
   { name: 'English', proficiency: 95, level: 'Fluent' },
-  { name: 'Afan Oromo', proficiency: 60, level: 'Intermediate' },
+  { name: 'Afan Oromo', proficiency: 95, level: 'Fluent' },
   { name: 'Arabic', proficiency: 30, level: 'Beginner' },
 ];
 
