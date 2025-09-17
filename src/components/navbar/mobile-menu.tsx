@@ -30,18 +30,18 @@ export function MobileMenu({ isOpen, onToggle }: MobileMenuProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 pt-20 z-40 bg-black/60 backdrop-blur-md overflow-y-auto"
+            className="fixed inset-0 pt-16 z-40 bg-black/50 backdrop-blur-md h-fit" // Changed to fixed and inset-0
           >
             <div className="p-4">
               <NavLinks
-                className="flex flex-col items-center gap-6"
+                className="flex flex-col items-center gap-4"
                 onClick={onToggle}
               />
               <div className="flex justify-center items-center">
                 <a
                   href={my_cv}
                   download="IsamAhmed_CV.pdf"
-                  className="block mt-6 w-10/12 sm:w-2/4 items-center text-center px-4 py-3 text-base font-medium text-white bg-gradient-to-br from-red-500/30 to-blue-800/30 backdrop-blur-lg shadow-md rounded-md ease-in-out duration-300 hover:text-blue-900 hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="block mt-4 w-2/4 items-center text-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-br from-red-500/30 to-blue-800/30 backdrop-blur-lg shadow-md rounded-md ease-in-out duration-300 hover:text-blue-900 hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Download CV
                 </a>
