@@ -186,7 +186,7 @@ export const ProjectsSection = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:-mb-48">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <ProjectCard
               key={project.title}
@@ -321,7 +321,7 @@ const DetailProjectCard = ({
 
   return (
     <div 
-      className={`flex max-md:-mt-96 flex-col md:flex-row gap-6 rounded-xl overflow-hidden border border-spacing-60 border-blue-950 hover:border-blue-500/30 transition-all duration-300 group relative transform-gpu hover:shadow-blue-950 hover:shadow-lg ${theme === 'dark' ? 'bg-transparent' : 'bg-gradient-to-br from-white via-blue-200 to-white backdrop-blur-md'}`}
+      className={`flex flex-col md:flex-row gap-6 rounded-xl overflow-hidden border border-spacing-60 border-blue-950 hover:border-blue-500/30 transition-all duration-300 group relative transform-gpu hover:shadow-blue-950 hover:shadow-lg ${theme === 'dark' ? 'bg-transparent' : 'bg-gradient-to-br from-white via-blue-200 to-white backdrop-blur-md'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

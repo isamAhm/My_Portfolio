@@ -199,6 +199,7 @@ export function HeroContent() {
           href="https://github.com/isamAhm"
           target="_blank"
           rel="noopener noreferrer"
+          title="Visit my GitHub profile"
           className={`transition-colors ${
             theme === 'dark' 
               ? 'text-gray-400 hover:text-white' 
@@ -211,6 +212,7 @@ export function HeroContent() {
           href="https://www.linkedin.com/in/isam-ahmed-b0b980306"
           target="_blank"
           rel="noopener noreferrer"
+          title="Visit my LinkedIn profile"
           className={`transition-colors ${
             theme === 'dark' 
               ? 'text-gray-400 hover:text-white' 

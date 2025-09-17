@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-dynamic para">
+    <div className="relative w-full h-dynamic para overflow-hidden">
       <ParallaxImages />
       <div className="absolute bottom-0 left-0 right-0 h-96 bg-transparent" />
     </div>
@@ -69,34 +69,34 @@ const ProjectText: React.FC = () => {
 const ParallaxImages = () => {
     const { theme } = useTheme();
     return (
-      <div className="mx-auto max-w-5xl px-4 pt-[200px]">
+      <div className="mx-auto max-w-5xl px-4 pt-[120px] sm:pt-[160px] md:pt-[200px] overflow-x-hidden">
         <ParallaxImg
           src={image1} // Use imported image
           alt="And example of a space launch"
           start={-200}
           end={200}
-          className={`w-1/3 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
+          className={`w-2/3 sm:w-1/2 md:w-1/3 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
         />
         <ParallaxImg
           src={image2} // Use imported image
           alt="An example of a space launch"
           start={200}
           end={-250}
-          className={`mx-auto w-2/3 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
+          className={`mx-auto w-11/12 sm:w-2/3 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
         />
         <ParallaxImg
           src={image3} // Use imported image
           alt="Orbiting satellite"
           start={-200}
           end={200}
-          className={`ml-auto w-1/3 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
+          className={`ml-auto w-2/3 sm:w-1/2 md:w-1/3 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
         />
         <ParallaxImg
           src={image4} // Use imported image
           alt="Orbiting satellite"
           start={0}
           end={-500}
-          className={`ml-24 w-5/12 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
+          className={`ml-6 sm:ml-12 md:ml-24 w-10/12 sm:w-8/12 md:w-5/12 ${theme === 'dark' ? '' : 'shadow-lg shadow-blue-700'}`}
         />
       </div>
     );
