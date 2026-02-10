@@ -1,21 +1,30 @@
 import React from 'react';
 import {
-    Code2, Briefcase,
-    Figma, Palette, Layout, Smartphone,
-    MonitorSmartphone as ReactIcon, Monitor, Database, Server,
-    Terminal, GitBranch, Container as Cloud,
-    FlaskConical as Cpu, FileCode, Coffee,
-    Binary as Python, Blocks,
-    Github, SquareCode,
-    BugPlay
-  } from 'lucide-react';
+  Code2, Briefcase,
+  Figma, Palette, Layout, Smartphone,
+  MonitorSmartphone as ReactIcon, Monitor, Database, Server,
+  Terminal, GitBranch, Container as Cloud,
+  FlaskConical as Cpu, FileCode, Coffee,
+  Binary as Python, Blocks,
+  Github, SquareCode,
+  BugPlay
+} from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 
 function TechnicalSkillSection() {
-  const {theme} = useTheme()
+  const { theme } = useTheme()
   return (
-    <div className='bg-transparent'>
-      <section className="py-16 px-4 md:px-8">
+    <div className='bg-transparent relative'>
+      {/* Gradient fade overlay at the top */}
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent via-transparent to-transparent pointer-events-none z-10"
+        style={{
+          background: theme === 'dark'
+            ? 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 50%, transparent 100%)'
+            : 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)'
+        }}
+      />
+
+      <section className="py-16 px-4 md:px-8 relative z-0">{/* Rest of the section */}
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-2 mb-8">
             <Code2 className="w-6 h-6 text-blue-600" />
@@ -41,8 +50,8 @@ function TechnicalSkillSection() {
                 skills: [
                   { name: "React.js", icon: <ReactIcon className="w-4 h-4" /> },
                   { name: "NextJs", icon: <ReactIcon className="w-4 h-4" /> },
-                //   { name: "Vue.js", icon: <Code2 className="w-4 h-4" /> },
-                //   { name: "Angular", icon: <Code2 className="w-4 h-4" /> },
+                  //   { name: "Vue.js", icon: <Code2 className="w-4 h-4" /> },
+                  //   { name: "Angular", icon: <Code2 className="w-4 h-4" /> },
                   { name: "TypeScript", icon: <FileCode className="w-4 h-4" /> },
                   { name: "JavaScript", icon: <FileCode className="w-4 h-4" /> },
                   { name: "HTML", icon: <Layout className="w-4 h-4" /> },
@@ -59,23 +68,23 @@ function TechnicalSkillSection() {
                 skills: [
                   { name: "Node.js", icon: <Terminal className="w-4 h-4" /> },
                   { name: "Express.js", icon: <Server className="w-4 h-4" /> },
-                //   { name: "NestJS", icon: <Terminal className="w-4 h-4" /> },
+                  //   { name: "NestJS", icon: <Terminal className="w-4 h-4" /> },
                   { name: "GraphQL", icon: <Blocks className="w-4 h-4" /> },
                   { name: "REST APIs", icon: <Server className="w-4 h-4" /> },
                   { name: "TypeScript", icon: <Server className="w-4 h-4" /> },
                   { name: "JavaScript", icon: <Server className="w-4 h-4" /> },
-                //   { name: "Microservices", icon: <Boxes className="w-4 h-4" /> }
+                  //   { name: "Microservices", icon: <Boxes className="w-4 h-4" /> }
                 ]
               },
               {
                 category: "Mobile App Development",
                 icon: <Smartphone className="w-6 h-6 text-orange-600" />,
                 skills: [
-                //   { name: "React Native", icon: <ReactIcon className="w-4 h-4" /> },
+                  //   { name: "React Native", icon: <ReactIcon className="w-4 h-4" /> },
                   { name: "Flutter", icon: <Smartphone className="w-4 h-4" /> },
-                //   { name: "iOS (Swift)", icon: <Terminal className="w-4 h-4" /> },
+                  //   { name: "iOS (Swift)", icon: <Terminal className="w-4 h-4" /> },
                   { name: "Kotlin", icon: <Terminal className="w-4 h-4" /> },
-                //   { name: "Expo", icon: <Smartphone className="w-4 h-4" /> }
+                  //   { name: "Expo", icon: <Smartphone className="w-4 h-4" /> }
                 ]
               },
               {
@@ -84,7 +93,7 @@ function TechnicalSkillSection() {
                 skills: [
                   { name: "PostgreSQL", icon: <Database className="w-4 h-4" /> },
                   { name: "MongoDB", icon: <Database className="w-4 h-4" /> },
-                //   { name: "Redis", icon: <Database className="w-4 h-4" /> },
+                  //   { name: "Redis", icon: <Database className="w-4 h-4" /> },
                   { name: "MySQL", icon: <Database className="w-4 h-4" /> },
                   { name: "Firebase", icon: <Cloud className="w-4 h-4" /> },
                   { name: "Prisma", icon: <Database className="w-4 h-4" /> },
@@ -101,7 +110,7 @@ function TechnicalSkillSection() {
                   { name: "Java", icon: <Coffee className="w-4 h-4" /> },
                   { name: "C++", icon: <Cpu className="w-4 h-4" /> },
                   { name: "Dart", icon: <SquareCode className="w-4 h-4" /> },
-                //   { name: "Go", icon: <Terminal className="w-4 h-4" /> }
+                  //   { name: "Go", icon: <Terminal className="w-4 h-4" /> }
                 ]
               },
               {
@@ -112,11 +121,11 @@ function TechnicalSkillSection() {
                   { name: "Github", icon: <Github className="w-4 h-4" /> },
                   { name: "Vercel", icon: <Cloud className="w-4 h-4" /> },
                   { name: "Sentry", icon: <BugPlay className="w-4 h-4" /> },
-                //   { name: "Docker", icon: <Docker className="w-4 h-4" /> },
-                //   { name: "AWS", icon: <Cloud className="w-4 h-4" /> },
-                //   { name: "CI/CD", icon: <GitBranch className="w-4 h-4" /> },
-                //   { name: "Jest", icon: <TestTube className="w-4 h-4" /> },
-                //   { name: "Kubernetes", icon: <Boxes className="w-4 h-4" /> }
+                  //   { name: "Docker", icon: <Docker className="w-4 h-4" /> },
+                  //   { name: "AWS", icon: <Cloud className="w-4 h-4" /> },
+                  //   { name: "CI/CD", icon: <GitBranch className="w-4 h-4" /> },
+                  //   { name: "Jest", icon: <TestTube className="w-4 h-4" /> },
+                  //   { name: "Kubernetes", icon: <Boxes className="w-4 h-4" /> }
                 ]
               }
             ].map((category, index) => (

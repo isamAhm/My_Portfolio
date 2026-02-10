@@ -6,7 +6,7 @@ import { HeroContent } from './hero-content';
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  useFollowCursor(contentRef, { intensity: 3 });
+  useFollowCursor(contentRef, { intensityX: 3 });
 
   return (
     <section id="home" className="relative min-h-[150vh] w-full overflow-hidden bg-transparent">

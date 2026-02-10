@@ -8,6 +8,7 @@ import TechnicalSkillSection from './components/technical-skills-section';
 import LanguageSection from './components/languages-section';
 import Experience from './components/Experience';
 import Certificates from './components/certificates';
+import { ThreeJSSkillsSection } from './components/threejs-skills-section';
 import { ThemeProvider } from './context/ThemeContext';
 
 const HeroSection = React.lazy(() =>
@@ -44,9 +45,8 @@ function App() {
       <main className="relative min-h-screen transition-colors duration-300 dark:bg-gradient-to-br dark:from-black dark:via-gray-950 dark:to-black bg-white">
         {isLoading ? (
           <div
-            className={`fixed inset-0 bg-gradient-to-br from-black via-gray-950 to-black flex flex-col items-center justify-center z-50 transition-opacity duration-500 ${
-              isFading ? 'opacity-0' : 'opacity-100'
-            }`}
+            className={`fixed inset-0 bg-gradient-to-br from-black via-gray-950 to-black flex flex-col items-center justify-center z-50 transition-opacity duration-500 ${isFading ? 'opacity-0' : 'opacity-100'
+              }`}
           >
             <LoadingScreen />
           </div>
@@ -57,14 +57,15 @@ function App() {
               <HeroSection />
               <AboutSection />
               <SkillsSection />
+              <ThreeJSSkillsSection />
               <TechnicalSkillSection />
               <Certificates />
               <Experience />
               <LanguageSection />
-              <SmoothScrollHero/>
-              <ProjectDetails/>
+              <SmoothScrollHero />
+              <ProjectDetails />
               <ProjectsSection />
-              <HorizontalText/>
+              <HorizontalText />
               <ContactSection />
             </Suspense>
           </>
