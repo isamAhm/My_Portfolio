@@ -4,6 +4,32 @@
 
 @layer base {
   :root {
+    /* Light theme colors - Warm Cream Theme */
+    --background: 45 20% 98%;
+    --foreground: 25 15% 15%;
+    --card: 40 25% 96%;
+    --card-foreground: 25 15% 15%;
+    --popover: 40 25% 96%;
+    --popover-foreground: 25 15% 15%;
+    --primary: 120 50% 45%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 270 45% 55%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 35 15% 92%;
+    --muted-foreground: 25 8% 45%;
+    --accent: 30 70% 65%;
+    --accent-foreground: 25 15% 15%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 35 12% 88%;
+    --input: 35 12% 88%;
+    --ring: 120 50% 45%;
+    --radius: 0.5rem;
+    --section-height: 0px;
+  }
+
+  .dark {
+    /* Dark theme colors */
     --background: 240 20% 12%;
     --foreground: 0 0% 90%;
     --card: 240 25% 18%;
@@ -23,8 +49,6 @@
     --border: 220 10% 25%;
     --input: 220 10% 25%;
     --ring: 200 60% 45%;
-    --radius: 0.5rem;
-    --section-height: 0px;
   }
 }
 
