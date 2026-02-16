@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { NavLinks } from './nav-links';
 import { MobileMenu } from './mobile-menu';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
@@ -130,3 +130,5 @@ export function Navbar() {
     </motion.header>
   );
 }
+
+export default memo(Navbar);
