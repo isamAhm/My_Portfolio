@@ -129,16 +129,16 @@ function TechnicalSkillSection() {
                 ]
               }
             ].map((category, index) => (
-              <div key={index} className={`bg-transparent hover:shadow-blue-950 hover:shadow-lg text-white border border-blue-700 p-6 rounded-xl transition-shadow hover:-translate-y-1 hover:scale-[101%] hover:ease-in-out hover:transition-transform hover:duration-500 ${theme === 'dark' ? 'bg-transparent' : 'bg-gradient-to-br from-black via-blue-950 to-blue-900 backdrop-blur-md'}`}>
+              <div key={index} className={`bg-transparent hover:shadow-blue-950 hover:shadow-lg text-white border border-blue-700 p-6 rounded-xl transition-shadow hover:-translate-y-1 hover:scale-[101%] hover:ease-in-out hover:transition-transform hover:duration-500 ${theme === 'dark' ? 'bg-transparent' : 'bg-gradient-to-br from-white via-blue-200 to-white backdrop-blur-md'}`}>
                 <div className="flex items-center gap-2 mb-4">
                   {category.icon}
-                  <h3 className="text-xl font-semibold text-white">{category.category}</h3>
+                  <h3 className={`text-xl font-semibold  ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{category.category}</h3>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   {category.skills.map((skill, skillIndex) => (
                     <div
                       key={skillIndex}
-                      className="flex items-center gap-2 px-3 py-2 bg-blue-950/20 text-blue-600 rounded-lg text-sm font-medium"
+                      className={`flex items-center gap-2 px-3 py-2 text-blue-600 rounded-lg text-sm font-medium ${theme === 'dark' ? 'bg-blue-950/20' : 'bg-blue-950/10'}`}
                     >
                       {skill.icon}
                       <span>{skill.name}</span>

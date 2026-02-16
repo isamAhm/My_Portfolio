@@ -1,7 +1,7 @@
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NavLinks } from './nav-links';
-import my_cv from '../../assets/Isam_Ahmed_Resume.pdf';
+import my_cv from '../../assets/Isam_Ahmed_Resume_updated.pdf';
 import { useTheme } from '@/context/ThemeContext';
 
 interface MobileMenuProps {

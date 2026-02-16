@@ -52,7 +52,7 @@ function Certificates() {
           <p className={`text-xl mb-8 ${theme === 'dark' ? '' : 'text-black'}`}>Certificates I received in my journey</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {certificates.map((certificate, index) => (
-              <div 
+              <div
                 key={index}
                 onClick={() => setSelectedCertificate(index)}
                 className={`group border-2 border-blue-700 block hover:shadow-blue-950 hover:ease-in-out hover:transition-transform hover:duration-500  rounded-xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden transform hover:-translate-y-1 duration-300 cursor-pointer ${theme === 'dark' ? 'bg-transparent' : 'bg-gradient-to-br from-white via-blue-200 to-white backdrop-blur-md'}`}
@@ -80,11 +80,11 @@ function Certificates() {
 
       {/* Modal */}
       {selectedCertificate !== null && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setSelectedCertificate(null)}
         >
-          <div 
+          <div
             className={`relative  rounded-xl max-w-4xl w-full p-6 border border-blue-800 ${theme === 'dark' ? 'bg-gradient-to-br from-black via-gray-950 to-black' : 'bg-gradient-to-br from-white via-blue-200 to-white'}`}
             onClick={(e) => e.stopPropagation()}
           >
@@ -96,19 +96,19 @@ function Certificates() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            
+
             <img
               src={certificates[selectedCertificate].image}
               alt={certificates[selectedCertificate].name}
               className="w-full h-full max-h-[70vh] object-contain rounded-lg"
             />
-            
+
             <div className="mt-4 text-center">
               <h3 className={`text-2xl font-bold  mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                 {certificates[selectedCertificate].name}
               </h3>
               <div className="flex justify-center gap-4 mt-4">
-                
+
                 <a
                   href={certificates[selectedCertificate].url}
                   target="_blank"

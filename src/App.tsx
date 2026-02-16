@@ -10,8 +10,6 @@ import Experience from './components/Experience';
 import Certificates from './components/certificates';
 import { ThreeJSSkillsSection } from './components/threejs-skills-section';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
-import lightThemeBg from './assets/light-theme-bg.jpg';
-
 const HeroSection = React.lazy(() =>
   import('./components/hero-section/home').then((mod) => ({ default: mod.HeroSection }))
 );
@@ -49,11 +47,7 @@ function AppContent() {
       };
     } else {
       return {
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(${lightThemeBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-        backgroundRepeat: 'no-repeat'
+        background: 'linear-gradient(to bottom right, #e8f5e9, #c8e6c9, #e8f5e9)'
       };
     }
   };
