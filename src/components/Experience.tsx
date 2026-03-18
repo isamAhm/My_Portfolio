@@ -7,53 +7,75 @@ function Experience() {
   const { theme } = useTheme();
   const experiences = [
     {
-      role: "Full Stack Developer",
-      company: "Platform Technologies PLC",
-      period: "Feb, 2025 - Present",
-      location: "Addis Ababa, Ethiopia",
-      description: "Contributed as a Full Stack and Frontend Developer. Collaborated with a dynamic team to deliver impactful projects.",
+      role: "Forward Development Engineer & Lead Full Stack Developer",
+      company: "Flozi",
+      period: "Feb 2025 – Present",
+      location: "Remote",
+      description: "Led end-to-end development of scalable web applications, overseeing frontend and backend architecture, feature implementation, and deployment.",
       achievements: [
-        "Implemented essential features based on user requirements, enhancing functionality and user experience.",
-        "Conducted thorough testing to identify and resolve issues, improving the overall software performance.",
-        "Played a key role in refining software to make it production-ready, ensuring high quality and efficiency."
+        "Managed technical decisions, code quality, and performance optimization across the stack.",
+        "Oversaw frontend and backend architecture and feature implementation.",
+        "Led deployment pipelines and ensured production-grade reliability."
+      ]
+    },
+    {
+      role: "Full Stack Developer",
+      company: "Neue World",
+      period: "Nov 2024 – Present",
+      location: "Remote / United Arab Emirates",
+      description: "Developed a Framer Marketplace plugin that enhances design quality, system consistency, and accessibility.",
+      achievements: [
+        "Implemented automated analysis and validation features aligned with platform standards.",
+        "Improved performance and ensured marketplace readiness.",
+        "Contributed to design system consistency and accessibility improvements."
+      ]
+    },
+    {
+      role: "Solutions Architect and Full Stack Developer",
+      company: "Elsewedy Electric",
+      period: "May 2025 – Present",
+      location: "Hybrid / Addis Ababa",
+      description: "Led the end-to-end design and development of a secure biometric time management system.",
+      achievements: [
+        "Integrated facial recognition and fingerprint authentication across desktop and web applications.",
+        "Architected a secure and scalable biometric data pipeline.",
+        "Ensured cross-platform compatibility between desktop and web interfaces."
+      ]
+    },
+    {
+      role: "Full Stack Developer",
+      company: "Platform Technologies",
+      period: "Feb 2023 – Dec 2024",
+      location: "Addis Ababa",
+      description: "Collaborated as a Full Stack Developer and Lead Front-end Developer within a dynamic team.",
+      achievements: [
+        "Developed a freelance marketplace platform from the ground up.",
+        "Helped finalize and ship an e-commerce website.",
+        "Led frontend architecture decisions and code quality standards."
       ]
     },
     {
       role: "Web Developer",
-      company: "Ministry of Innovative Technology(MinT)",
-      period: "Feb, 2025 - Present",
+      company: "Ministry of Innovative Technology (MinT)",
+      period: "Feb, 2023 - May 2024",
       location: "Addis Ababa, Ethiopia",
       description: "Joined a team of developers to contribute to web hosting solutions for my internship.",
       achievements: [
-        "Monitored server performance, uptime, and traffic to ensure smooth operation",
+        "Monitored server performance, uptime, and traffic to ensure smooth operation.",
         "Deploying websites and web applications on web servers, ensuring seamless launch and scaling.",
-        " Improving website speed and performance through caching, and other techniques."
+        "Improving website speed and performance through caching, and other techniques."
       ]
     },
     {
       role: "UI/UX Designer and Full Stack Developer",
       company: "Freelance",
-      period: "Jan, 2024 - Present",
+      period: "Jan, 2023 - 2024",
       location: "Addis Ababa, Ethiopia",
       description: "Worked as both UI/UX Designer and Full Stack Developer by designing and developing modern, clean, and user-friendly web applications, prioritizing usability and accessibility.",
       achievements: [
-        "Built RESTful APIs",
-        "Designed clean and user-friendly interfaces",
-        "Ensured design consistency"
-      ]
-    },
-    {
-      role: "Full Stack Developer",
-      company: "Prodigy Info Tech",
-      period: "Jun - Jul, 2024",
-      location: "Addis Ababa, Ethiopia",
-      description: "Developed and maintained full-stack web applications, completing a one-month internship.",
-      achievements: [
-        "Built RESTful APIs and Integrated third-party api services",
-        "Designed a clean user interface and Ensured design consistency",
-        "Developed and maintained full-stack applications using React.js, Next.js, Node.js, PostgreSQL, and Mongodb."
-        // "Improved application performance by 50% through caching",
-        // "Integrated third-party services that automated key business processes"
+        "Built RESTful APIs.",
+        "Designed clean and user-friendly interfaces.",
+        "Ensured design consistency."
       ]
     }
   ];
@@ -64,19 +86,18 @@ function Experience() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-2 mb-8">
             <Briefcase className="w-6 h-6 text-blue-600" />
-            <h2 className={`text-3xl font-bold ${
-              theme === 'dark' ? 'text-white' : 'text-black'
-            }`}>Professional Experience</h2>
+            <h2 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'
+              }`}>Professional Experience</h2>
           </div>
-          
+
           <div className="relative space-y-8">
             {/* Animated Timeline Line */}
             <motion.div
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ 
-                duration: 1.5, 
+              transition={{
+                duration: 1.5,
                 ease: "easeInOut",
                 delay: 0.3
               }}
@@ -92,8 +113,8 @@ function Experience() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, }}
-                transition={{ 
-                  duration: 0.6, 
+                transition={{
+                  duration: 0.6,
                   delay: 0.5 + index * 0.15,
                   ease: "easeOut"
                 }}
@@ -108,21 +129,19 @@ function Experience() {
 
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                   <div>
-                    <h3 className={`text-xl font-bold ${
-                      theme === 'dark' ? 'text-white' : 'text-black'
-                    }`}>{experience.role}</h3>
+                    <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'
+                      }`}>{experience.role}</h3>
                     <p className={`text-blue-400 font-medium mt-1 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-900'}`}>{experience.company}</p>
                   </div>
                   <div className={`flex mt-2 md:mt-0 ${theme === 'dark' ? 'text-blue-300' : 'text-blue-900'}`}>
-                      <p className={` px-3 py-1 rounded-full text-sm ${theme === 'dark' ? 'bg-blue-900/30 text-blue-300 ' : 'bg-blue-900 text-white '} `}>
-                        {experience.period}
-                      </p>
-                      <p className='text-sm px-3 content-center'>| {experience.location}</p>
+                    <p className={` px-3 py-1 rounded-full text-sm ${theme === 'dark' ? 'bg-blue-900/30 text-blue-300 ' : 'bg-blue-900 text-white '} `}>
+                      {experience.period}
+                    </p>
+                    <p className='text-sm px-3 content-center'>| {experience.location}</p>
                   </div>
                 </div>
-                <p className={`${
-                  theme === 'dark' ? 'text-gray-300' : 'text-black'
-                } mb-4`}>{experience.description}</p>
+                <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-black'
+                  } mb-4`}>{experience.description}</p>
                 <ul className="space-y-2">
                   {experience.achievements.map((achievement, achievementIndex) => (
                     <li key={achievementIndex} className="flex items-start gap-2">

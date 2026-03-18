@@ -1,5 +1,5 @@
+import { memo, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 
 interface NavLinksProps {
@@ -15,63 +15,34 @@ const links = [
   { href: '#contact', label: 'Contact' },
 ];
 
-// Allowed characters for the randomization effect
-const allowedCharacters = ['X', '$', 'Y', '#', '?', '*', '0', '1', '+'];
-
-// Function to return a random character
-function getRandomCharacter() {
-  const randomIndex = Math.floor(Math.random() * allowedCharacters.length);
-  return allowedCharacters[randomIndex];
-}
-
-// Function to create an event handler for hover effects
-function createEventHandler() {
-  let isInProgress = false;
-  const BASE_DELAY = 70;
-
-  return function handleHoverEvent(e: Event) {
-    if (isInProgress) return;
-
+// Shared scramble effect — defined once at module level
+const ALLOWED = ['X', '$', 'Y', '#', '?', '*', '0', '1', '+'];
+function createScramble() {
+  let busy = false;
+  return (e: Event) => {
+    if (busy) return;
     const target = e.target as HTMLElement;
-    const text = target.innerText;
-    const randomizedText = text.split('').map(getRandomCharacter).join('');
-
-    for (let i = 0; i < text.length; i++) {
-      isInProgress = true;
-
+    const original = target.innerText;
+    const scrambled = original.split('').map(() => ALLOWED[Math.floor(Math.random() * ALLOWED.length)]).join('');
+    for (let i = 0; i < original.length; i++) {
+      busy = true;
       setTimeout(() => {
-        const nextIndex = i + 1;
-        target.innerText = `${text.substring(
-          0,
-          nextIndex
-        )}${randomizedText.substring(nextIndex)}`;
-
-        if (nextIndex === text.length) {
-          isInProgress = false;
-        }
-      }, i * BASE_DELAY);
+        target.innerText = original.substring(0, i + 1) + scrambled.substring(i + 1);
+        if (i === original.length - 1) busy = false;
+      }, i * 70);
     }
   };
 }
 
-export function NavLinks({ className = '', onClick }: NavLinksProps) {
+export const NavLinks = memo(function NavLinks({ className = '', onClick }: NavLinksProps) {
   const { theme } = useTheme();
 
   useEffect(() => {
-    // Add hover effect to all elements with the class `.text-hover-effect`
-    const elements = document.querySelectorAll('.text-hover-effect');
-    elements.forEach((element) => {
-      const eventHandler = createEventHandler();
-      element.addEventListener('mouseover', eventHandler);
-    });
-
-    // Cleanup event listeners on unmount
-    return () => {
-      elements.forEach((element) => {
-        const eventHandler = createEventHandler();
-        element.removeEventListener('mouseover', eventHandler);
-      });
-    };
+    const elements = Array.from(document.querySelectorAll<HTMLElement>('.text-hover-effect'));
+    // Store handler per element so cleanup removes the exact same reference
+    const handlers = elements.map(() => createScramble());
+    elements.forEach((el, i) => el.addEventListener('mouseover', handlers[i]));
+    return () => elements.forEach((el, i) => el.removeEventListener('mouseover', handlers[i]));
   }, []);
 
   return (
@@ -80,9 +51,8 @@ export function NavLinks({ className = '', onClick }: NavLinksProps) {
         <motion.li key={href} whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
           <a
             href={href}
-            className={`text-hover-effect transition-colors hover:text-blue-400 ${
-              theme === 'dark' ? 'text-gray-300' : 'text-gray-700 hover:text-blue-900 max-md:text-white'
-            }`}
+            className={`text-hover-effect transition-colors hover:text-blue-400 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700 hover:text-blue-900 max-md:text-white'
+              }`}
             onClick={onClick}
           >
             {label}
@@ -91,4 +61,4 @@ export function NavLinks({ className = '', onClick }: NavLinksProps) {
       ))}
     </ul>
   );
-}
+});

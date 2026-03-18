@@ -14,7 +14,7 @@ import portgo from '../assets/portgo.png';
 import tictactoe from '../assets/tictactoe.png';
 import jd2 from '../assets/jd2.png';
 import portfolio from '../assets/portfolio.png';
-import snapscape from '../assets/snap.png'; 
+import snapscape from '../assets/snap.png';
 import hiresmart from '../assets/hiresmart2.png';
 import efoyta from '../assets/efoyta.png';
 import mobile from '../assets/mobile1.png';
@@ -53,10 +53,10 @@ interface DetailProject {
 
 interface VideoData {
   videoUrl: string;
+  thumbnail?: string;
   title: string;
-  tags: string[]; // Add this line
+  tags: string[];
   description: string;
-  
 }
 
 const projects: Project[] = [
@@ -176,16 +176,14 @@ export const ProjectsSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className={`text-4xl font-bold mb-6 ${
-            theme === 'dark' ? 'text-gray-300' : 'text-black'
-          }`}>Other Personal Projects</h2>
-          <p className={`text-xl ${
-            theme === 'dark' ? 'text-gray-300' : 'text-black'
-          }`}>
+          <h2 className={`text-4xl font-bold mb-6 ${theme === 'dark' ? 'text-gray-300' : 'text-black'
+            }`}>Other Personal Projects</h2>
+          <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-black'
+            }`}>
             A showcase of my other work and personal projects
           </p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <ProjectCard
@@ -195,8 +193,9 @@ export const ProjectsSection = () => {
                 if (project.videoUrl) {
                   setSelectedVideo({
                     videoUrl: project.videoUrl,
+                    thumbnail: project.image,
                     title: project.title,
-                    description: project.modalDescription || project.description, // Use modalDescription if available
+                    description: project.modalDescription || project.description,
                     tags: project.tags,
                   });
                 } else {
@@ -212,6 +211,7 @@ export const ProjectsSection = () => {
         isOpen={!!selectedVideo}
         onClose={() => setSelectedVideo(null)}
         videoUrl={selectedVideo?.videoUrl}
+        thumbnail={selectedVideo?.thumbnail}
         title={selectedVideo?.title}
         tags={selectedVideo?.tags}
         description={selectedVideo?.description}
@@ -233,17 +233,18 @@ export const ProjectDetails = () => {
             description="StreamBox is a comprehensive movie and TV show streaming platform designed to deliver a smooth and engaging user experience. It features a dynamic, responsive frontend built with Next.js, offering fast navigation and server-side rendering for optimal performance. The backend is powered by Node.js, MongoDB, and Prisma, providing a scalable and efficient infrastructure for content management, user authentication, and seamless streaming."
             image={streambox3}
             technologies={['Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'Prisma']}
-            liveUrl="https://streambox-final-streaming.vercel.app/home"
-            githubUrl="https://github.com/isamAhm/"
+            liveUrl="https://streamboxx.duckdns.org"
+            githubUrl="https://github.com/isamAhm/streambox_final_streaming"
             videoUrl={videotry}
             onPlayClick={() => setSelectedVideo({
               videoUrl: videotry,
+              thumbnail: streambox3,
               title: 'StreamBox',
               description: 'StreamBox is a comprehensive movie and TV show streaming platform designed to deliver a smooth and engaging user experience. It features a dynamic, responsive frontend built with Next.js, offering fast navigation and server-side rendering for optimal performance. The backend is powered by Node.js, MongoDB, and Prisma, providing a scalable and efficient infrastructure for content management, user authentication, and seamless streaming.',
               tags: ['Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'Prisma'],
             })}
           />
-          
+
           <DetailProjectCard
             title="Efoyat Doctor's Appointment"
             description="A modern web-based platform designed to streamline doctor-patient interactions through an efficient appointment booking and management system. Unlike traditional methods, where appointments are often scheduled in-person visits, Efoyta allows patients to book appointments online from anywhere at their convenience. Doctors can manage their schedules, request lab checkups, and receive results digitally. Patients also receive their lab results through the platform, ensuring seamless communication and better patient care."
@@ -254,12 +255,13 @@ export const ProjectDetails = () => {
             videoUrl={videotry}
             onPlayClick={() => setSelectedVideo({
               videoUrl: videotry,
+              thumbnail: efoyta,
               title: "Efoyat Doctor's Appointment",
               description: 'Efoyta is a modern web-based platform designed to streamline doctor-patient interactions through an efficient appointment booking and management system. Unlike traditional methods, where appointments are often scheduled in-person visits, Efoyta allows patients to book appointments online from anywhere at their convenience. Doctors can manage their schedules, request lab checkups, and receive results digitally. Patients also receive their lab results through the platform, ensuring seamless communication and better patient care.',
               tags: ['React.js', 'Node.js', 'Redux', 'Express.js', 'MongoDB'],
             })}
           />
-          
+
 
           <DetailProjectCard
             title="HireSmart - ML-Powered Resume Screening"
@@ -271,12 +273,13 @@ export const ProjectDetails = () => {
             videoUrl={videotry}
             onPlayClick={() => setSelectedVideo({
               videoUrl: videotry,
+              thumbnail: hiresmart,
               title: 'HireSmart - ML-Powered Resume Screening',
               description: 'HireSmart leverages machine learning to automate resume screening, analyzing resumes against job requirements and scoring candidates. It is an intelligent resume screening platform designed to streamline the recruitment process. It helps employers efficiently filter and evaluate candidate applications by automating the screening process. By leveraging machine learning models and advanced algorithms, HireSmart quickly identifies the most suitable candidates based on their resumes and job requirements, saving valuable time and resources for hiring managers.',
               tags: ['React.js', 'Node.js', 'JavaScript', 'OpenAI API'],
             })}
           />
-          
+
           <DetailProjectCard
             title="Cultural Restaurant Management"
             description="A mobile app for a table reservation solution designed specifically for a local Ethiopian cultural restaurant. The project aims to simplify the process of managing table reservations and food ordering while offering a user-friendly experience for both administrators and customers. The system ensures smooth booking, enhances operational efficiency, and facilitates easy management of tables. With secure authentication and an intuitive interface, the system meets the unique needs of the restaurant while maintaining simplicity and efficiency, providing a complete dining experience."
@@ -287,6 +290,7 @@ export const ProjectDetails = () => {
             videoUrl={videotry}
             onPlayClick={() => setSelectedVideo({
               videoUrl: videotry,
+              thumbnail: mobile,
               title: 'Cultural Restaurant Management',
               description: 'A mobile app for a table reservation solution designed specifically for a local Ethiopian cultural restaurant. The project aims to simplify the process of managing table reservations and food ordering while offering a user-friendly experience for both administrators and customers. The system ensures smooth booking, enhances operational efficiency, and facilitates easy management of tables. With secure authentication and an intuitive interface, the system meets the unique needs of the restaurant while maintaining simplicity and efficiency, providing a complete dining experience.',
               tags: ['Flutter', 'Express', 'REST', 'Node.js', 'MongoDB', 'Swift', 'Dart'],
@@ -299,6 +303,7 @@ export const ProjectDetails = () => {
         isOpen={!!selectedVideo}
         onClose={() => setSelectedVideo(null)}
         videoUrl={selectedVideo?.videoUrl}
+        thumbnail={selectedVideo?.thumbnail}
         title={selectedVideo?.title}
         description={selectedVideo?.description}
         tags={selectedVideo?.tags}
@@ -320,16 +325,16 @@ const DetailProjectCard = ({
   const { theme } = useTheme();
 
   return (
-    <div 
+    <div
       className={`flex flex-col md:flex-row gap-6 rounded-xl overflow-hidden border border-spacing-60 border-blue-950 hover:border-blue-500/30 transition-all duration-300 group relative transform-gpu hover:shadow-blue-950 hover:shadow-lg ${theme === 'dark' ? 'bg-transparent' : 'bg-gradient-to-br from-white via-blue-200 to-white backdrop-blur-md'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Container with Overlay */}
       <div className="md:w-1/3 relative overflow-hidden">
-        <img 
-          src={image} 
-          alt={title} 
+        <img
+          src={image}
+          alt={title}
           className={`w-full h-64 md:h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
         />
         {/* Dark Overlay */}
@@ -344,10 +349,10 @@ const DetailProjectCard = ({
         <p className={` text-sm leading-relaxed ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
           {description}
         </p>
-        
+
         <div className="flex flex-wrap gap-2">
           {technologies.map((tech, index) => (
-            <span 
+            <span
               key={index}
               className={`px-2 py-1 bg-blue-500/10  rounded-md text-xs border border-blue-500/20 ${theme === 'dark' ? 'text-blue-300' : 'text-black'}`}
             >
@@ -357,7 +362,7 @@ const DetailProjectCard = ({
         </div>
 
         <div className="flex gap-3 pt-2">
-          <a 
+          <a
             href={liveUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -365,7 +370,7 @@ const DetailProjectCard = ({
           >
             Live Demo <ExternalLink size={14} className="ml-1.5" />
           </a>
-          <a 
+          <a
             href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -373,9 +378,9 @@ const DetailProjectCard = ({
           >
             Code <Github size={14} className="ml-1.5" />
           </a>
-          <button 
+          <button
             onClick={onPlayClick}
-            className={`inline-flex items-center px-3 py-1.5 bg-purple-500/20 rounded-lg hover:bg-purple-500/30 transition-colors text-sm border border-purple-500/30 ${ theme === 'dark' ? 'text-purple-300' : 'text-black'}`}
+            className={`inline-flex items-center px-3 py-1.5 bg-purple-500/20 rounded-lg hover:bg-purple-500/30 transition-colors text-sm border border-purple-500/30 ${theme === 'dark' ? 'text-purple-300' : 'text-black'}`}
           >
             Watch Demo <Play size={14} className="ml-1.5" />
           </button>

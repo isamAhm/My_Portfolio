@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useState, Suspense, useMemo } from 'react';
 import LoadingScreen from './components/loading/loading-screen';
 import Navbar from './components/navbar/navbar';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -44,6 +44,13 @@ const ThreeJSSkillsSection = React.lazy(() =>
   import('./components/threejs-skills-section').then((mod) => ({ default: mod.ThreeJSSkillsSection }))
 );
 
+// Defined outside AppContent so it's never recreated
+const SectionLoader = () => (
+  <div className="flex items-center justify-center min-h-[200px]">
+    <div className="animate-pulse text-lg opacity-50">Loading...</div>
+  </div>
+);
+
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [isFading, setIsFading] = useState(false);
@@ -58,30 +65,13 @@ function AppContent() {
     return () => clearTimeout(loadingTimeout);
   }, []);
 
-  const getBackgroundStyle = () => {
-    if (theme === 'dark') {
-      return {
-        background: 'linear-gradient(to bottom right, black, rgb(3, 7, 18), black)'
-      };
-    } else {
-      return {
-        background: 'linear-gradient(to bottom right, #e8f5e9, #c8e6c9, #e8f5e9)'
-      };
-    }
-  };
-
-  // Simple loading fallback component
-  const SectionLoader = () => (
-    <div className="flex items-center justify-center min-h-[200px]">
-      <div className="animate-pulse text-lg opacity-50">Loading...</div>
-    </div>
-  );
+  const bgStyle = useMemo(() => theme === 'dark'
+    ? { background: 'linear-gradient(to bottom right, black, rgb(3, 7, 18), black)' }
+    : { background: 'linear-gradient(to bottom right, #e8f5e9, #c8e6c9, #e8f5e9)' }
+    , [theme]);
 
   return (
-    <main
-      className="relative min-h-screen transition-colors duration-300"
-      style={getBackgroundStyle()}
-    >
+    <main className="relative min-h-screen transition-colors duration-300" style={bgStyle}>
       {isLoading ? (
         <div
           className={`fixed inset-0 bg-gradient-to-br from-black via-gray-950 to-black flex flex-col items-center justify-center z-50 transition-opacity duration-500 ${isFading ? 'opacity-0' : 'opacity-100'

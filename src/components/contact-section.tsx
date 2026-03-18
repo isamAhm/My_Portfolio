@@ -1,91 +1,36 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useRef, useState, useEffect } from 'react';
-import { Mail } from 'lucide-react';
+import { useRef, useState, useCallback, memo } from 'react';
+import { Mail, Github, Linkedin } from 'lucide-react';
 import { Button } from './ui/button';
-import { Github, Linkedin } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { useTheme } from '@/context/ThemeContext';
 
-// Allowed characters for the randomization effect
-const allowedCharacters = ['X', '$', 'Y', '#', '?', '*', '0', '1', '+'];
-
-// Function to return a random character
-function getRandomCharacter() {
-  const randomIndex = Math.floor(Math.random() * allowedCharacters.length);
-  return allowedCharacters[randomIndex];
-}
-
-// Function to create an event handler for hover effects
-function createEventHandler() {
-  let isInProgress = false;
-  const BASE_DELAY = 70;
-
-  return function handleHoverEvent(e: MouseEvent) {
-    if (isInProgress) return;
-
-    const target = e.target as HTMLElement;
-    const text = target.innerText;
-    const randomizedText = text.split('').map(getRandomCharacter).join('');
-
-    for (let i = 0; i < text.length; i++) {
-      isInProgress = true;
-
-      setTimeout(() => {
-        const nextIndex = i + 1;
-        target.innerText = `${text.substring(0, nextIndex)}${randomizedText.substring(nextIndex)}`;
-        if (nextIndex === text.length) {
-          isInProgress = false;
-        }
-      }, i * BASE_DELAY);
-    }
-  };
-}
-
-export function ContactSection() {
+export const ContactSection = memo(function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [isSending, setIsSending] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState('');
-  const {theme} = useTheme()
+  const { theme } = useTheme();
+
   useGSAP(() => {
     const inputs = formRef.current?.querySelectorAll('input, textarea, button');
     if (!inputs) return;
-
     gsap.from(inputs, {
-      opacity: 0,
-      y: 30,
-      duration: 0.6,
-      stagger: 0.1,
+      opacity: 0, y: 30, duration: 0.6, stagger: 0.1,
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'top center',
         end: 'center center',
         invalidateOnRefresh: true,
       },
-      onComplete: () => gsap.set(inputs, { clearProps: 'all' }),
+      onComplete: () => { gsap.set(inputs, { clearProps: 'all' }); },
     });
   }, { scope: sectionRef });
 
-  useEffect(() => {
-    const elements = document.querySelectorAll('.text-hover-effect');
-    elements.forEach((element) => {
-      const eventHandler = createEventHandler();
-      element.addEventListener('mouseover', eventHandler);
-    });
-
-    return () => {
-      elements.forEach((element) => {
-        const eventHandler = createEventHandler();
-        element.removeEventListener('mouseover', eventHandler);
-      });
-    };
-  }, []);
-
-  const sendEmail = async (e: React.FormEvent) => {
+  const sendEmail = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
-
     setIsSending(true);
     try {
       const result = await emailjs.sendForm(
@@ -94,73 +39,47 @@ export function ContactSection() {
         formRef.current,
         import.meta.env.VITE_YOUR_PUBLIC_KEY
       );
-      
-
       if (result.status === 200) {
         setFeedbackMessage('Message sent successfully!');
         formRef.current.reset();
       } else {
         setFeedbackMessage('Failed to send message. Please try again.');
       }
-    } catch (error) {
+    } catch {
       setFeedbackMessage('Error sending message. Please check your network and try again.');
     } finally {
       setIsSending(false);
     }
-  };
+  }, []);
+
+  const inputCls = `mt-1 block w-full rounded-lg border-gray-600 p-3 focus:border-blue-500 focus:ring-blue-500 ${theme === 'dark' ? 'placeholder-gray-400 bg-gray-800 text-white' : 'placeholder-gray-700 bg-gray-300 text-black'
+    }`;
+  const labelCls = `block text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`;
 
   return (
     <section id="contact" ref={sectionRef} className="min-h-screen bg-transparent py-20 pt-48">
       <div className="mx-auto max-w-3xl px-4">
-        <h2 className={`mb-12 text-center text-4xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Let's Connect</h2>
+        <h2 className={`mb-12 text-center text-4xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+          Let's Connect
+        </h2>
         <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
           <div>
-            <label htmlFor="name" className={`block text-sm font-medium  ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              className={`mt-1 block w-full rounded-lg border-gray-600  p-3  
-                        focus:border-blue-500 focus:ring-blue-500 ${theme === 'dark' ? 'placeholder-gray-400 bg-gray-800 text-white' : 'placeholder-gray-700 bg-gray-300 text-black'}`}
-              placeholder="Your name"
-              required
-            />
+            <label htmlFor="name" className={labelCls}>Name</label>
+            <input type="text" name="name" id="name" className={inputCls} placeholder="Your name" required />
           </div>
           <div>
-            <label htmlFor="email" className={`block text-sm font-medium  ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className={`mt-1 block w-full rounded-lg border-gray-600  p-3
-                        focus:border-blue-500 focus:ring-blue-500 ${theme === 'dark' ? 'placeholder-gray-400 bg-gray-800 text-white' : 'placeholder-gray-700 bg-gray-300 text-black'}`}
-              placeholder="your@email.com"
-              required
-            />
+            <label htmlFor="email" className={labelCls}>Email</label>
+            <input type="email" name="email" id="email" className={inputCls} placeholder="your@email.com" required />
           </div>
           <div>
-            <label htmlFor="message" className={`block text-sm font-medium  ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
-              Message
-            </label>
-            <textarea
-              name="message"
-              id="message"
-              rows={10}
-              className={`mt-1 block w-full rounded-lg border-gray-600  p-3  
-                        focus:border-blue-500 focus:ring-blue-500 resize-none ${theme === 'dark' ? 'bg-gray-800 text-white placeholder-gray-400' : 'placeholder-gray-700 bg-gray-300 text-black'}`}
-              placeholder="Your message..."
-              required
-            />
+            <label htmlFor="message" className={labelCls}>Message</label>
+            <textarea name="message" id="message" rows={10}
+              className={`${inputCls} resize-none`} placeholder="Your message..." required />
           </div>
-          <Button type="submit" size="lg" disabled={isSending} className={`w-full hover:shadow-lg hover:shadow-blue-950 group ${theme === 'dark' ? '' : 'bg-gray-900 text-white'}`}>
+          <Button type="submit" size="lg" disabled={isSending}
+            className={`w-full hover:shadow-lg hover:shadow-blue-950 group ${theme === 'dark' ? '' : 'bg-gray-900 text-white'}`}>
             <span className="relative flex items-center gap-2">
-              <span className="text-hover-effect">
-                {isSending ? 'Sending...' : 'Send Message'}
-              </span>
+              <span className="text-hover-effect">{isSending ? 'Sending...' : 'Send Message'}</span>
               <Mail className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </span>
           </Button>
@@ -168,23 +87,15 @@ export function ContactSection() {
         </form>
       </div>
       <div className="mt-36 flex justify-center gap-6">
-        <a
-          href="https://github.com/isamAhm"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={` transition-colors ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-700 hover:text-blue-600'}`}
-        >
+        <a href="https://github.com/isamAhm" target="_blank" rel="noopener noreferrer"
+          className={`transition-colors ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-700 hover:text-blue-600'}`}>
           <Github size={24} />
         </a>
-        <a
-          href="https://www.linkedin.com/in/isam-ahmed-b0b980306"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={` transition-colors ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-700 hover:text-blue-600'}`}
-        >
+        <a href="https://www.linkedin.com/in/isam-ahmed-b0b980306" target="_blank" rel="noopener noreferrer"
+          className={`transition-colors ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-700 hover:text-blue-600'}`}>
           <Linkedin size={24} />
         </a>
       </div>
     </section>
   );
-}
+});

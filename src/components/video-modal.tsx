@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useTheme } from '@/context/ThemeContext';
 import { X } from 'lucide-react';
 
@@ -5,20 +6,21 @@ interface VideoModalProps {
   isOpen: boolean;
   onClose: () => void;
   videoUrl?: string;
+  thumbnail?: string;
   title?: string;
   description?: string;
   tags?: string[];
 }
 
-export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags }: VideoModalProps) => {
-  const {theme} = useTheme();
+export const VideoModal = memo(function VideoModal({ isOpen, onClose, videoUrl, thumbnail, title, description, tags }: VideoModalProps) {
+  const { theme } = useTheme();
   if (!isOpen) return null;
   return (
     <div
       className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
       onClick={onClose}
     >
-       <div
+      <div
         className={`relative  rounded-xl max-w-4xl w-full h-[75vh] p-6 border border-blue-800 flex flex-col ${theme === 'dark' ? 'bg-gradient-to-br from-black via-gray-950 to-black' : 'bg-gradient-to-br from-white via-blue-200 to-white backdrop-blur-md'}`}
         onClick={(e) => e.stopPropagation()}
       >
@@ -29,12 +31,14 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
         >
           <X className="h-6 w-6 text-white" />
         </button>
-        
+
         {videoUrl && (
           <div className="flex-shrink-0">
-            <video 
-              src={videoUrl} 
-              controls 
+            <video
+              src={videoUrl}
+              controls
+              preload="none"
+              poster={thumbnail}
               className="w-full rounded-lg"
               muted
               playsInline
@@ -44,7 +48,7 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
           </div>
         )}
 
-        <div 
+        <div
           className="flex flex-col gap-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700 scrollbar-gutter-stable mt-4 text-start flex-grow overflow-y-auto overscroll-contain pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-800 hover:scrollbar-thumb-blue-700"
           onWheel={(e) => e.stopPropagation()}
         >
@@ -69,4 +73,4 @@ export const VideoModal = ({ isOpen, onClose, videoUrl, title, description, tags
       </div>
     </div>
   );
-};
+});

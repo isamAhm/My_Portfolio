@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Float, Text, Html } from '@react-three/drei';
 import * as THREE from 'three';
@@ -86,14 +86,16 @@ function SkillCard3D({
 function BackgroundParticles() {
     const pointsRef = useRef<THREE.Points>(null);
 
-    const particleCount = 1500;
-    const positions = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 50;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 50;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 50;
-    }
+    const positions = useMemo(() => {
+        const particleCount = 1500;
+        const arr = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            arr[i * 3] = (Math.random() - 0.5) * 50;
+            arr[i * 3 + 1] = (Math.random() - 0.5) * 50;
+            arr[i * 3 + 2] = (Math.random() - 0.5) * 50;
+        }
+        return arr;
+    }, []);
 
     useFrame((state) => {
         if (pointsRef.current) {
@@ -104,18 +106,9 @@ function BackgroundParticles() {
     return (
         <points ref={pointsRef}>
             <bufferGeometry>
-                <bufferAttribute
-                    attach="attributes-position"
-                    args={[positions, 3]}
-                />
+                <bufferAttribute attach="attributes-position" args={[positions, 3]} />
             </bufferGeometry>
-            <pointsMaterial
-                size={0.05}
-                color="#4a90e2"
-                transparent
-                opacity={0.6}
-                sizeAttenuation
-            />
+            <pointsMaterial size={0.05} color="#4a90e2" transparent opacity={0.6} sizeAttenuation />
         </points>
     );
 }
@@ -165,113 +158,38 @@ function FloatingShapes() {
 
 
 // Main 3D Scene
-function ThreeJSScene() {
+function ThreeJSScene({ scrollProgressRef }: { scrollProgressRef: React.MutableRefObject<number> }) {
     const controlsRef = useRef<any>(null);
 
     const skills = [
-        {
-            title: "Three.js",
-            color: "#ff6b6b",
-            position: [-4, 0, 0] as [number, number, number]
-        },
-        {
-            title: "WebGL",
-            color: "#4ecdc4",
-            position: [0, 0, 0] as [number, number, number]
-        },
-        {
-            title: "GLSL",
-            color: "#45b7d1",
-            position: [4, 0, 0] as [number, number, number]
-        },
-        {
-            title: "R3F",
-            color: "#96ceb4",
-            position: [-2, -3, 0] as [number, number, number]
-        },
-        {
-            title: "Drei",
-            color: "#feca57",
-            position: [2, -3, 0] as [number, number, number]
-        }
+        { title: "Three.js", color: "#ff6b6b", position: [-4, 0, 0] as [number, number, number] },
+        { title: "WebGL", color: "#4ecdc4", position: [0, 0, 0] as [number, number, number] },
+        { title: "GLSL", color: "#45b7d1", position: [4, 0, 0] as [number, number, number] },
+        { title: "R3F", color: "#96ceb4", position: [-2, -3, 0] as [number, number, number] },
+        { title: "Drei", color: "#feca57", position: [2, -3, 0] as [number, number, number] },
     ];
 
-    // Handle scroll-based zoom
-    useFrame(({ camera }) => {
-        const section = document.getElementById('expertise');
-        if (section) {
-            const rect = section.getBoundingClientRect();
-            const sectionHeight = rect.height;
-            const viewportHeight = window.innerHeight;
+    const MIN_DIST = 6;
+    const MAX_DIST = 20;
 
-            // ============================================
-            // SCROLL ZOOM CONFIGURATION
-            // ============================================
-            // Adjust these values to control when zoom starts/ends:
+    // Drive zoom via OrbitControls' own distance constraints — no camera fighting
+    useFrame(() => {
+        const controls = controlsRef.current;
+        if (!controls) return;
 
-            const ZOOM_START_OFFSET = 0.3;  // 🎯 ADJUST THIS: 0 = starts immediately, 1 = starts at end
-            // 0.3 = starts after scrolling 30% through section
+        const progress = scrollProgressRef.current;
+        const targetDist = THREE.MathUtils.lerp(MAX_DIST, MIN_DIST, progress);
+        const currentDist = controls.getDistance();
+        const newDist = THREE.MathUtils.lerp(currentDist, targetDist, 0.06);
 
-            const ZOOM_END_OFFSET = 0.9;    // �� ADJUST THIS: When zoom completes (0-1)
-            // 0.9 = completes at 90% through section
+        // Clamp controls to the new distance so OrbitControls moves the camera itself
+        controls.minDistance = newDist;
+        controls.maxDistance = newDist;
+        controls.update();
 
-            // ============================================
-
-            // Calculate raw scroll progress through the section
-            let rawScrollProgress = 0;
-
-            if (rect.top <= 0 && rect.bottom >= viewportHeight) {
-                // Section fills viewport - calculate progress
-                rawScrollProgress = Math.abs(rect.top) / (sectionHeight - viewportHeight);
-            } else if (rect.top > 0) {
-                // Section hasn't reached top yet
-                rawScrollProgress = 0;
-            } else {
-                // Section has passed
-                rawScrollProgress = 1;
-            }
-
-            // Clamp between 0 and 1
-            rawScrollProgress = Math.max(0, Math.min(1, rawScrollProgress));
-
-            // Apply start and end offsets to delay zoom
-            let adjustedProgress = 0;
-            if (rawScrollProgress < ZOOM_START_OFFSET) {
-                // Before zoom starts - stay at max distance
-                adjustedProgress = 0;
-            } else if (rawScrollProgress > ZOOM_END_OFFSET) {
-                // After zoom ends - stay at min distance
-                adjustedProgress = 1;
-            } else {
-                // During zoom - map progress between start and end offsets
-                adjustedProgress = (rawScrollProgress - ZOOM_START_OFFSET) / (ZOOM_END_OFFSET - ZOOM_START_OFFSET);
-            }
-
-            // Map adjusted progress to camera distance
-            // ============================================
-            // ZOOM DISTANCE CONFIGURATION
-            // ============================================
-            const minDistance = 6;   // 🎯 ADJUST THIS: Closest zoom (smaller = closer)
-            const maxDistance = 20;  // 🎯 ADJUST THIS: Farthest zoom (larger = farther)
-            // ============================================
-
-            const targetDistance = maxDistance - (adjustedProgress * (maxDistance - minDistance));
-
-            // Smoothly interpolate camera distance
-            // ============================================
-            // ZOOM SMOOTHNESS CONFIGURATION
-            // ============================================
-            const LERP_FACTOR = 0.05;  // 🎯 ADJUST THIS: 0.01 = very smooth/slow, 0.1 = fast
-            // 0.05 = balanced smoothness
-            // ============================================
-
-            const currentDistance = camera.position.length();
-            const newDistance = THREE.MathUtils.lerp(currentDistance, targetDistance, LERP_FACTOR);
-
-            // Update camera position maintaining direction
-            camera.position.normalize().multiplyScalar(newDistance);
-            camera.updateProjectionMatrix();
-        }
+        // Restore real bounds after update so user can still drag
+        controls.minDistance = MIN_DIST;
+        controls.maxDistance = MAX_DIST;
     });
 
     return (
@@ -279,12 +197,7 @@ function ThreeJSScene() {
             <ambientLight intensity={0.4} />
             <pointLight position={[10, 10, 10]} intensity={1} />
             <pointLight position={[-10, -10, -10]} intensity={0.5} color="#4ecdc4" />
-            <spotLight
-                position={[0, 10, 0]}
-                angle={0.3}
-                penumbra={1}
-                intensity={0.5}
-            />
+            <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={0.5} />
 
             <BackgroundParticles />
             <FloatingShapes />
@@ -309,8 +222,8 @@ function ThreeJSScene() {
                 rotateSpeed={0.5}
                 autoRotate={true}
                 autoRotateSpeed={0.5}
-                maxDistance={20}
-                minDistance={6}
+                maxDistance={MAX_DIST}
+                minDistance={MIN_DIST}
                 maxPolarAngle={Math.PI / 1.5}
                 minPolarAngle={Math.PI / 3}
             />
@@ -321,10 +234,50 @@ function ThreeJSScene() {
 // Main component
 export function ThreeJSSkillsSection() {
     const { theme } = useTheme();
+    const sectionRef = useRef<HTMLElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+    const scrollProgressRef = useRef(0);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => setIsVisible(entry.isIntersecting),
+            { threshold: 0.05 }
+        );
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    // Track scroll progress through the section — stored in a ref to avoid re-renders
+    useEffect(() => {
+        const handleScroll = () => {
+            const section = sectionRef.current;
+            if (!section) return;
+
+            const rect = section.getBoundingClientRect();
+            const sectionH = rect.height;
+            const viewportH = window.innerHeight;
+
+            let progress = 0;
+            if (rect.top <= 0 && rect.bottom >= viewportH) {
+                // Section is filling the viewport — calculate how far through we are
+                progress = Math.abs(rect.top) / (sectionH - viewportH);
+            } else if (rect.top > 0) {
+                progress = 0; // haven't reached it yet
+            } else {
+                progress = 1; // passed it
+            }
+
+            scrollProgressRef.current = Math.max(0, Math.min(1, progress));
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // run once on mount
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
-        <section className="relative py-20 bg-transparent overflow-visible min-h-screen pb-40" id="expertise">{/* Added pb-40 and overflow-visible */}
-            {/* Content Overlay - pointer-events-none to allow 3D interaction */}
+        <section ref={sectionRef} className="relative py-20 bg-transparent overflow-hidden min-h-screen pb-40" id="expertise">
+            {/* Content Overlay */}
             <div className="absolute inset-0 z-10 pointer-events-none">
                 <div className="max-w-6xl mx-auto px-4 h-full flex flex-col">
                     <motion.div
@@ -333,61 +286,41 @@ export function ThreeJSSkillsSection() {
                         transition={{ duration: 0.8 }}
                         className="text-center pt-0"
                     >
-                        <h2 className={`text-4xl font-bold mb-6 ${theme === 'dark' ? 'text-gray-300' : 'text-black'
-                            }`}>
+                        <h2 className={`text-4xl font-bold mb-6 ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
                             Expertise
                         </h2>
-                        <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-black'
-                            }`}>
+                        <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>
                             Advanced 3D web development and interactive experiences
                         </p>
                     </motion.div>
-
-                    {/* Spacer */}
                     <div className="flex-1" />
-
-                    {/* Instructions at bottom */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
                         className="text-center pb-8"
                     >
-                        <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                            }`}>
+                        <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                             Drag to rotate • Scroll to zoom • Hover over cards for details
                         </p>
                     </motion.div>
                 </div>
             </div>
 
-            {/* Full-screen 3D Canvas - extends beyond section */}
-            <div className="absolute inset-0 w-full h-full" style={{ height: 'calc(100% + 200px)' }}>
-                {/* Fade out gradient at bottom */}
-                {/* <div className="absolute bottom-4 left-0 right-0 h-55 pointer-events-none z-20"
-                    style={{
-                        background: theme === 'dark'
-                            ? 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%)'
-                            : 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.9) 100%)'
-                    }}
-                /> */}
-                <Canvas
-                    camera={{
-                        position: [0, 0, 12],
-                        fov: 60
-                    }}
-                    gl={{
-                        antialias: true,
-                        alpha: true,
-                        powerPreference: "high-performance"
-                    }}
-                    style={{ background: 'transparent' }}
-                    onCreated={({ gl }) => {
-                        gl.domElement.style.touchAction = 'none';
-                    }}
-                >
-                    <ThreeJSScene />
-                </Canvas>
+            {/* 3D Canvas — only mounted when section is visible */}
+            <div className="absolute inset-0 w-full h-full">
+                {isVisible && (
+                    <Canvas
+                        camera={{ position: [0, 0, 20], fov: 60 }}
+                        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+                        style={{ background: 'transparent' }}
+                        onCreated={({ gl }) => {
+                            gl.domElement.style.touchAction = 'none';
+                        }}
+                    >
+                        <ThreeJSScene scrollProgressRef={scrollProgressRef} />
+                    </Canvas>
+                )}
             </div>
         </section>
     );
